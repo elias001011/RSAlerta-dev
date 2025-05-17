@@ -48,7 +48,6 @@
             --input-bg: #eeeeee;
             --card-hover: #f0f0f0;
         }
-
         /* Tema translúcido (herda do tema escuro, mas com containers transparentes) */
         body.translucent-theme {
             background-image: url('https://picsum.photos/1920/1089?random=1');
@@ -78,7 +77,6 @@
             min-height: 100vh;
             padding-bottom: 60px;
         }
-
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Montserrat', sans-serif;
             margin-bottom: 15px;
@@ -116,7 +114,6 @@
             display: flex;
             list-style: none;
         }
-
         nav ul li {
             margin-left: 20px;
         }
@@ -361,7 +358,6 @@
             color: var(--primary-color);
             font-size: 1.2rem;
         }
-
         .air-quality {
             margin-top: 20px;
             padding-top: 15px;
@@ -442,7 +438,6 @@
             flex-wrap: wrap;
             gap: 10px;
         }
-
         .map-control-btn {
             flex: 1;
             min-width: 80px;
@@ -482,7 +477,6 @@
             gap: 15px;
             padding-bottom: 10px;
         }
-
         .forecast-card {
             min-width: 120px;
             background-color: var(--card-hover);
@@ -527,7 +521,6 @@
                 grid-column: span 12;
             }
         }
-
         .hourly-cards {
             display: flex;
             overflow-x: auto;
@@ -564,7 +557,6 @@
             text-align: center;
             transition: transform 0.2s;
         }
-
         .hourly-card:hover {
             transform: translateY(-5px);
         }
@@ -610,7 +602,6 @@
             border-radius: 8px;
             margin-bottom: 15px;
         }
-
         .message {
             margin-bottom: 15px;
             max-width: 80%;
@@ -1421,7 +1412,7 @@
                 <h3>Fontes</h3>
                 <ul>
                     <li>OpenWeatherMap API</li>
-                    <li>OpenAI API</li>
+                    <li>OpenAI API (via Netlify Function)</li> <!-- ATUALIZADO -->
                     <li>INMET - Instituto Nacional de Meteorologia</li>
                     <li>Defesa Civil do Rio Grande do Sul</li>
                     <li>Secretaria do Meio Ambiente do RS</li>
@@ -1443,7 +1434,7 @@
     <script>
         // Global variables
         const API_KEY = '87b42475468c3ba9298cf245b2fa9379';
-        const OPENAI_API_KEY = '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';
+        // const OPENAI_API_KEY = 'SUA_CHAVE_API_REMOVIDA_DAQUI'; // <<== REMOVIDO
         let currentCity = 'Porto Alegre, RS, Brasil';
         let currentCoords = { lat: -30.0346, lng: -51.2177 }; // Porto Alegre default
         let map;
@@ -1975,57 +1966,67 @@
                     content: message
                 });
                 
-                // Make API request
-                const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                // === INÍCIO DA MODIFICAÇÃO ===
+                // Faça a chamada para a sua função Netlify
+                const response = await fetch('/.netlify/functions/fetch-openai', { // URL ATUALIZADA
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${OPENAI_API_KEY}`
+                        // A Chave API NÃO é mais enviada daqui
                     },
                     body: JSON.stringify({
-                        model: 'gpt-4.1-nano-2025-04-14',
+                        model: 'gpt-4.1-nano-2025-04-14', // Você pode manter isso ou passar dinamicamente
                         messages: conversationHistory,
-                        temperature: 0.7
+                        temperature: 0.7 // Você pode manter isso ou passar dinamicamente
                     })
                 });
                 
-                const data = await response.json();
+                const data = await response.json(); // 'data' é o corpo da resposta da sua função Netlify
                 
-                if (data.error) {
-                    throw new Error(data.error.message);
-                }
-                
-                const aiResponse = data.choices[0].message.content;
-                
-                // Remove loading indicator
+                // Remova o indicador de carregamento
                 const loadingElement = document.getElementById(loadingId);
                 if (loadingElement) {
                     loadingElement.remove();
                 }
-                
-                // Add AI response to chat
-                addMessageToChat(aiResponse, 'ai');
-                
-                // Update chat history
-                chatHistory.push({ role: 'user', content: message });
-                chatHistory.push({ role: 'assistant', content: aiResponse });
-                
-                // Limit history to last 10 messages
-                if (chatHistory.length > 10) {
-                    chatHistory = chatHistory.slice(chatHistory.length - 10);
+
+                // Verifique se a chamada para a função Netlify foi bem-sucedida
+                if (!response.ok) {
+                    // 'data' pode conter um objeto de erro da sua função Netlify ou da API OpenAI
+                    const errorMessage = data.error || `Erro: ${response.status} ${response.statusText}`;
+                    throw new Error(errorMessage);
                 }
+
+                // A resposta da OpenAI estará dentro de 'data', conforme retornado pela sua função
+                // Exemplo: data.choices[0].message.content
+                if (data.choices && data.choices[0] && data.choices[0].message) {
+                    const aiResponse = data.choices[0].message.content;
+                    addMessageToChat(aiResponse, 'ai');
+
+                    // Atualize o histórico do chat
+                    chatHistory.push({ role: 'user', content: message });
+                    chatHistory.push({ role: 'assistant', content: aiResponse });
+                    
+                    // Limite o histórico (permanece o mesmo)
+                    if (chatHistory.length > 10) {
+                        chatHistory = chatHistory.slice(chatHistory.length - 10);
+                    }
+                } else if (data.error) { // Se a API OpenAI retornou um erro através da sua função (ou a própria função Netlify)
+                    throw new Error(data.error.message || data.error); // Ajuste conforme a estrutura de erro
+                } else {
+                    throw new Error('Estrutura de resposta inesperada do serviço de IA.');
+                }
+                // === FIM DA MODIFICAÇÃO ===
                 
             } catch (error) {
-                console.error('Error sending message to AI:', error);
+                console.error('Erro ao enviar mensagem para IA ou processar resposta:', error);
                 
-                // Remove loading indicator
-                const loadingElement = document.getElementById(loadingId);
+                // Remova o indicador de carregamento
+                const loadingElement = document.getElementById(loadingId); // Certifique-se que loadingId está definido
                 if (loadingElement) {
                     loadingElement.remove();
                 }
                 
-                // Add error message
-                addMessageToChat('Desculpe, não consegui processar sua mensagem. Por favor, tente novamente mais tarde.', 'ai');
+                addMessageToChat(`Desculpe, ocorreu um erro: ${error.message}. Por favor, tente novamente mais tarde.`, 'ai');
             }
         }
         
@@ -2046,9 +2047,13 @@
             
             // Format lists
             formattedMessage = formattedMessage.replace(/• (.*?)(<br>|$)/g, '<li>$1</li>');
-            formattedMessage = formattedMessage.replace(/<li>(.*?)<\/li>/g, '<ul style="padding-left: 20px; margin: 10px 0;">$&</ul>');
-            formattedMessage = formattedMessage.replace(/<ul style="padding-left: 20px; margin: 10px 0;"><\/ul>/g, '');
-            formattedMessage = formattedMessage.replace(/<\/ul><ul style="padding-left: 20px; margin: 10px 0;">/g, '');
+            // Wrap list items in a <ul> only if they exist
+            if (formattedMessage.includes('<li>')) {
+                 // Avoid wrapping multiple times or empty lists
+                formattedMessage = formattedMessage.replace(/(<li>.*?<\/li>)+/g, (match) => `<ul style="padding-left: 20px; margin: 10px 0;">${match}</ul>`);
+                // Clean up potentially duplicated ul tags if the regex runs multiple times on subgroups
+                formattedMessage = formattedMessage.replace(/<\/ul><ul style="padding-left: 20px; margin: 10px 0;">/g, '');
+            }
             
             // Format bold text
             formattedMessage = formattedMessage.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
@@ -2146,7 +2151,6 @@
                 btn.addEventListener('click', () => {
                     // Remove active class from all buttons
                     mapControlBtns.forEach(b => b.classList.remove('active'));
-                    
                     // Add active class to clicked button
                     btn.classList.add('active');
                     
