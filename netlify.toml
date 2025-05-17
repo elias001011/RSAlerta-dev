@@ -1,0 +1,5 @@
+[functions]
+  directory = "netlify/functions"
+# Se você estiver usando sintaxe JavaScript moderna (como import/export) na sua função,
+# pode ser necessário especificar um empacotador de nós:
+# node_bundler = "esbuild" 
