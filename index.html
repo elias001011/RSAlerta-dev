@@ -14,41 +14,52 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
             /* Variáveis de tema escuro (padrão) */
-            --bg-color: #121212;
-            --text-color: #f5f5f5;
-            --container-bg: #1e1e1e;
-            --container-border: #333333;
-            --primary-color: #3498db;
-            --secondary-color: #2ecc71;
-            --accent-color: #e74c3c;
-            --header-gradient-start: rgba(52, 152, 219, 0.9);
-            --header-gradient-end: rgba(46, 204, 113, 0.9);
-            --shadow-color: rgba(0, 0, 0, 0.3);
-            --input-bg: #2a2a2a;
-            --card-hover: #252525;
+            --bg-color: #0a0a0a;
+            --text-color: #ffffff;
+            --container-bg: #1a1a1a;
+            --container-border: #2a2a2a;
+            --primary-color: #3b82f6;
+            --secondary-color: #10b981;
+            --accent-color: #ef4444;
+            /* Cores da bandeira do RS para o header */
+            --rs-green: #009639;
+            --rs-yellow: #FFD700;
+            --rs-red: #DC143C;
+            --header-gradient-start: var(--rs-green);
+            --header-gradient-end: var(--rs-yellow);
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --input-bg: #262626;
+            --card-hover: #2a2a2a;
+            --modal-overlay: rgba(0, 0, 0, 0.8);
+            --glass-bg: rgba(26, 26, 26, 0.8);
+            --border-subtle: rgba(255, 255, 255, 0.1);
         }
 
         /* Tema claro */
         body.light-theme {
-            --bg-color: #f5f5f5;
-            --text-color: #121212;
+            --bg-color: #fafafa;
+            --text-color: #1a1a1a;
             --container-bg: #ffffff;
-            --container-border: #dddddd;
-            --primary-color: #2980b9;
-            --secondary-color: #27ae60;
-            --accent-color: #c0392b;
-            --header-gradient-start: rgba(41, 128, 185, 0.9);
-            --header-gradient-end: rgba(39, 174, 96, 0.9);
-            --shadow-color: rgba(0, 0, 0, 0.1);
-            --input-bg: #eeeeee;
-            --card-hover: #f0f0f0;
+            --container-border: #e5e5e5;
+            --primary-color: #2563eb;
+            --secondary-color: #059669;
+            --accent-color: #dc2626;
+            --header-gradient-start: var(--rs-green);
+            --header-gradient-end: var(--rs-yellow);
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --input-bg: #f5f5f5;
+            --card-hover: #f8f8f8;
+            --modal-overlay: rgba(0, 0, 0, 0.6);
+            --glass-bg: rgba(255, 255, 255, 0.9);
+            --border-subtle: rgba(0, 0, 0, 0.1);
         }
-        /* Tema translúcido (herda do tema escuro, mas com containers transparentes) */
+        
+        /* Tema translúcido */
         body.translucent-theme {
             background-image: url('https://picsum.photos/1920/1089?random=1');
             background-size: cover;
@@ -57,10 +68,10 @@
         }
         
         body.translucent-theme .container {
-            background-color: rgba(30, 30, 30, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-subtle);
         }
 
         * {
@@ -70,31 +81,35 @@
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
             min-height: 100vh;
-            padding-bottom: 60px;
+            overflow-x: hidden;
+            line-height: 1.6;
         }
+        
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Montserrat', sans-serif;
-            margin-bottom: 15px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.025em;
         }
 
-        /* Header */
+        /* Header moderno com cores da bandeira do RS */
         header {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: linear-gradient(to right, var(--header-gradient-start), var(--header-gradient-end));
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 15px 20px;
+            background: linear-gradient(135deg, var(--header-gradient-start) 0%, var(--header-gradient-end) 50%, var(--rs-red) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 16px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px var(--shadow-color);
+            box-shadow: 0 4px 20px var(--shadow-color);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .logo {
@@ -104,69 +119,84 @@
             text-decoration: none;
             display: flex;
             align-items: center;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            letter-spacing: -0.02em;
         }
 
         .logo i {
-            margin-right: 10px;
+            margin-right: 12px;
+            font-size: 28px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
 
         nav ul {
             display: flex;
             list-style: none;
-        }
-        nav ul li {
-            margin-left: 20px;
+            gap: 6px;
         }
 
+        /* Navegação limpa sem animações */
         nav ul li a {
             color: white;
             text-decoration: none;
             font-weight: 500;
-            transition: opacity 0.3s;
+            padding: 10px 16px;
+            border-radius: 10px;
+            transition: background-color 0.2s ease;
+            font-size: 14px;
         }
 
         nav ul li a:hover {
-            opacity: 0.8;
+            background: rgba(255, 255, 255, 0.15);
         }
 
         .theme-toggle {
             display: flex;
             align-items: center;
+            gap: 8px;
         }
 
         .theme-toggle button {
-            background: none;
+            background: rgba(255, 255, 255, 0.15);
             border: none;
             color: white;
             cursor: pointer;
-            margin-left: 10px;
-            padding: 5px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            padding: 10px;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
         }
 
         .theme-toggle button:hover {
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.25);
         }
 
         .theme-toggle button.active {
             background-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         /* Mobile menu */
         .mobile-menu-btn {
             display: none;
-            background: none;
+            background: rgba(255, 255, 255, 0.15);
             border: none;
             color: white;
-            font-size: 24px;
+            font-size: 18px;
             cursor: pointer;
+            padding: 10px;
+            border-radius: 10px;
         }
 
         /* Main content */
         main {
             max-width: 1400px;
-            margin: 20px auto;
+            margin: 24px auto;
             padding: 0 20px;
         }
 
@@ -176,32 +206,44 @@
             gap: 20px;
         }
 
-        /* Containers */
-        /* Padronização de containers e elementos */
+        /* Containers modernos SEM barrinhas verdes */
         .container {
             background-color: var(--container-bg);
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 6px var(--shadow-color);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 16px var(--shadow-color);
             transition: all 0.3s ease;
             height: 100%;
             border: 1px solid var(--container-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
         }
 
         .container:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px var(--shadow-color);
+            box-shadow: 0 8px 32px var(--shadow-color);
         }
 
+        /* Títulos dos containers SEM barrinhas verdes */
         .container h2 {
             color: var(--primary-color);
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-            font-size: 1.4rem;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: -0.025em;
         }
 
-        /* Search bar */
+        /* Search bar moderna */
         .search-container {
             grid-column: span 12;
         }
@@ -209,44 +251,56 @@
         .search-bar {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
+            align-items: center;
         }
 
         .search-input-container {
             position: relative;
             flex: 1;
-            min-width: 250px;
+            min-width: 280px;
         }
 
         .search-input {
             width: 100%;
-            padding: 12px 15px;
-            border: none;
-            border-radius: 30px;
+            padding: 14px 20px;
+            border: 2px solid var(--container-border);
+            border-radius: 12px;
             background-color: var(--input-bg);
             color: var(--text-color);
-            font-size: 16px;
+            font-size: 15px;
             outline: none;
-            transition: box-shadow 0.3s;
+            transition: all 0.3s ease;
+            font-family: inherit;
         }
 
         .search-input:focus {
-            box-shadow: 0 0 0 2px var(--primary-color);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            transform: translateY(-1px);
         }
 
+        /* Botões modernos e simples */
         .search-btn {
-            background-color: var(--primary-color);
+            background-color: var(--secondary-color);
             color: white;
             border: none;
-            border-radius: 30px;
-            padding: 12px 20px;
+            border-radius: 12px;
+            padding: 14px 24px;
             cursor: pointer;
-            font-weight: 500;
-            transition: background-color 0.3s;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            box-shadow: 0 2px 12px rgba(16, 185, 129, 0.25);
         }
 
         .search-btn:hover {
-            background-color: var(--secondary-color);
+            background-color: #059669;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
         }
 
         .city-suggestions {
@@ -255,23 +309,42 @@
             left: 0;
             right: 0;
             background-color: var(--container-bg);
-            border-radius: 10px;
-            margin-top: 5px;
-            box-shadow: 0 4px 10px var(--shadow-color);
+            border-radius: 12px;
+            margin-top: 6px;
+            box-shadow: 0 8px 32px var(--shadow-color);
             z-index: 100;
-            max-height: 300px;
+            max-height: 250px;
             overflow-y: auto;
             display: none;
+            border: 1px solid var(--container-border);
+            backdrop-filter: blur(20px);
         }
 
         .city-suggestions.active {
             display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .city-suggestion {
-            padding: 10px 15px;
+            padding: 12px 20px;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid var(--container-border);
+        }
+
+        .city-suggestion:last-child {
+            border-bottom: none;
         }
 
         .city-suggestion:hover {
@@ -282,36 +355,32 @@
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
         .city-chip {
             background-color: var(--container-border);
             color: var(--text-color);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 16px;
+            font-size: 13px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
         }
 
         .city-chip:hover {
-            background-color: var(--primary-color);
+            background-color: var(--secondary-color);
             color: white;
+            transform: translateY(-1px);
         }
 
-        /* Weather info */
+        /* Weather info - MENOR que o mapa */
         .weather-info {
-            grid-column: span 4;
+            grid-column: span 5;
         }
 
         @media (max-width: 1200px) {
-            .weather-info {
-                grid-column: span 6;
-            }
-        }
-
-        @media (max-width: 768px) {
             .weather-info {
                 grid-column: span 12;
             }
@@ -321,54 +390,89 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         .weather-icon {
             width: 100px;
             height: 100px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
         }
 
         .temperature {
             font-size: 3rem;
             font-weight: 700;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+            letter-spacing: -0.05em;
         }
 
         .weather-description {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
+            font-size: 1.1rem;
+            margin-bottom: 16px;
             text-align: center;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .city-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary-color);
         }
 
         .weather-details {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 12px;
         }
 
         .weather-detail {
             display: flex;
             align-items: center;
+            padding: 14px;
+            background-color: var(--card-hover);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--container-border);
+        }
+
+        .weather-detail:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            transform: translateY(-1px);
         }
 
         .weather-detail i {
-            margin-right: 10px;
+            margin-right: 12px;
             color: var(--primary-color);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
         }
-        .air-quality {
-            margin-top: 20px;
-            padding-top: 15px;
+
+        .weather-detail:hover i {
+            color: white;
+        }
+
+        /* Air quality integrada no weather info */
+        .air-quality-section {
+            margin-top: 24px;
+            padding-top: 24px;
             border-top: 1px solid var(--container-border);
+        }
+
+        .air-quality-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 16px;
+            font-size: 1rem;
         }
 
         .air-quality-indicator {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-top: 10px;
+            margin: 12px 0;
         }
 
         .air-quality-bar {
@@ -376,7 +480,7 @@
             height: 8px;
             background-color: var(--container-border);
             border-radius: 4px;
-            margin: 0 10px;
+            margin: 0 12px;
             position: relative;
             overflow: hidden;
         }
@@ -387,276 +491,211 @@
             left: 0;
             height: 100%;
             border-radius: 4px;
-            background: linear-gradient(to right, #2ecc71, #f1c40f, #e74c3c);
+            background: var(--secondary-color);
+            transition: width 0.5s ease;
         }
 
+        .air-quality-text {
+            text-align: center;
+            margin-top: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        /* Botão de IA moderno */
         .ai-chat-btn {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             width: 100%;
-            padding: 12px;
-            margin-top: 20px;
-            background-color: var(--primary-color);
+            padding: 16px;
+            margin-top: 24px;
+            background: linear-gradient(135deg, var(--secondary-color), #059669);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-weight: 500;
+            border-radius: 12px;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
             text-align: center;
+            font-size: 15px;
+            box-shadow: 0 2px 12px rgba(16, 185, 129, 0.25);
         }
 
         .ai-chat-btn:hover {
-            background-color: var(--secondary-color);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
         }
 
-        /* Map */
+        .ai-chat-btn i {
+            font-size: 1.1rem;
+        }
+
+        /* Map - MAIOR que o clima */
         .map-container {
-            grid-column: span 8;
+            grid-column: span 7;
         }
 
         @media (max-width: 1200px) {
             .map-container {
-                grid-column: span 6;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .map-container {
                 grid-column: span 12;
             }
         }
 
-        #map {
-            height: 400px;
-            width: 100%;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-
+        /* Controles do mapa ACIMA do mapa */
         .map-controls {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
+            margin-bottom: 16px;
         }
+
         .map-control-btn {
             flex: 1;
             min-width: 80px;
-            padding: 10px;
+            padding: 10px 14px;
             background-color: var(--container-border);
             color: var(--text-color);
             border: none;
-            border-radius: 6px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
             text-align: center;
+            font-weight: 500;
+            font-size: 13px;
         }
 
         .map-control-btn.active {
-            background-color: var(--primary-color);
+            background-color: var(--secondary-color);
             color: white;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
         }
 
         .map-control-btn:hover:not(.active) {
             background-color: var(--card-hover);
+            transform: translateY(-1px);
         }
 
-        /* Forecast */
+        /* Mapa com altura otimizada */
+        #map {
+            height: 400px;
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px var(--shadow-color);
+            border: 1px solid var(--container-border);
+        }
+
+        /* Forecast containers PADRONIZADOS */
         .forecast-container {
             grid-column: span 6;
         }
 
-        @media (max-width: 768px) {
-            .forecast-container {
-                grid-column: span 12;
-            }
-        }
-
-        .daily-forecast {
-            display: flex;
-            overflow-x: auto;
-            gap: 15px;
-            padding-bottom: 10px;
-        }
-        .forecast-card {
-            min-width: 120px;
-            background-color: var(--card-hover);
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            flex: 1;
-        }
-
-        .forecast-card .day {
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-
-        .forecast-card img {
-            width: 50px;
-            height: 50px;
-            margin: 10px 0;
-        }
-
-        .forecast-card .temp-range {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .forecast-card .temp-max {
-            font-weight: 500;
-        }
-
-        .forecast-card .temp-min {
-            opacity: 0.7;
-        }
-
-        /* Hourly forecast */
         .hourly-forecast-container {
             grid-column: span 6;
         }
 
         @media (max-width: 768px) {
+            .forecast-container,
             .hourly-forecast-container {
                 grid-column: span 12;
             }
         }
-        .hourly-cards {
+
+        /* AMBOS os containers de previsão com o MESMO estilo */
+        .forecast-scroll-container {
             display: flex;
             overflow-x: auto;
-            gap: 15px;
-            padding-bottom: 10px;
+            gap: 16px;
+            padding-bottom: 12px;
             scrollbar-width: thin;
-        }
-        
-        /* Estilização da barra de rolagem para combinar com o tema */
-        .hourly-cards::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+            scrollbar-color: var(--secondary-color) var(--container-bg);
         }
 
-        .hourly-cards::-webkit-scrollbar-track {
+        .forecast-scroll-container::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .forecast-scroll-container::-webkit-scrollbar-track {
             background: var(--container-bg);
+            border-radius: 3px;
         }
 
-        .hourly-cards::-webkit-scrollbar-thumb {
-            background: var(--container-border);
-            border-radius: 4px;
+        .forecast-scroll-container::-webkit-scrollbar-thumb {
+            background: var(--secondary-color);
+            border-radius: 3px;
         }
 
-        .hourly-cards::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-color);
-        }
-
-        .hourly-card {
-            min-width: 100px;
-            flex: 0 0 auto;
+        /* Cards de previsão PADRONIZADOS */
+        .forecast-card {
+            min-width: 140px;
             background-color: var(--card-hover);
-            border-radius: 8px;
-            padding: 15px;
+            border-radius: 16px;
+            padding: 20px;
             text-align: center;
-            transition: transform 0.2s;
-        }
-        .hourly-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .hourly-card .hour {
-            font-weight: 500;
-            margin-bottom: 10px;
+            flex: 0 0 auto;
+            transition: all 0.3s ease;
+            border: 1px solid var(--container-border);
+            position: relative;
+            overflow: hidden;
         }
 
-        .hourly-card img {
-            width: 50px;
-            height: 50px;
-            margin: 10px 0;
+        .forecast-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
         }
 
-        .hourly-card .temp {
-            font-size: 1.2rem;
-            font-weight: 500;
-            margin-bottom: 5px;
+        .forecast-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--shadow-color);
         }
 
-        .hourly-card .description {
+        .forecast-card .day,
+        .forecast-card .hour {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--primary-color);
             font-size: 0.9rem;
-            opacity: 0.8;
         }
 
-        /* AI Chat */
-        .ai-chat-container {
-            grid-column: span 12;
+        .forecast-card img {
+            width: 48px;
+            height: 48px;
+            margin: 12px 0;
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
         }
 
-        .chat-interface {
+        .forecast-card .temp-range {
             display: flex;
-            flex-direction: column;
-            height: 400px;
-        }
-
-        .chat-messages {
-            flex: 1;
-            overflow-y: auto;
-            padding: 10px;
-            background-color: var(--card-hover);
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-        .message {
-            margin-bottom: 15px;
-            max-width: 80%;
-        }
-
-        .message.user {
-            margin-left: auto;
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 15px 15px 0 15px;
-            padding: 10px 15px;
-        }
-
-        .message.ai {
-            margin-right: auto;
-            background-color: var(--container-border);
-            border-radius: 15px 15px 15px 0;
-            padding: 10px 15px;
-        }
-
-        .chat-input-container {
-            display: flex;
-            gap: 10px;
-        }
-
-        .chat-input {
-            flex: 1;
-            padding: 12px 15px;
-            border: none;
-            border-radius: 30px;
-            background-color: var(--input-bg);
-            color: var(--text-color);
-            font-size: 16px;
-            outline: none;
-        }
-
-        .chat-send-btn {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 46px;
-            height: 46px;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: background-color 0.3s;
+            gap: 12px;
+            margin-top: 8px;
         }
 
-        .chat-send-btn:hover {
-            background-color: var(--secondary-color);
+        .forecast-card .temp-max,
+        .forecast-card .temp {
+            font-weight: 700;
+            font-size: 1rem;
         }
 
-        /* Date and time */
+        .forecast-card .temp-min {
+            opacity: 0.7;
+            font-size: 1rem;
+        }
+
+        .forecast-card .description {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-top: 8px;
+            line-height: 1.3;
+        }
+
+        /* Date and time - centralização perfeita */
         .date-time-container {
             grid-column: span 4;
         }
@@ -679,17 +718,22 @@
             align-items: center;
             justify-content: center;
             height: 100%;
+            min-height: 200px;
+            text-align: center;
         }
 
         .current-time {
-            font-size: 3rem;
+            font-size: 2.8rem;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            color: var(--primary-color);
+            letter-spacing: -0.05em;
         }
 
         .current-date {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             opacity: 0.8;
+            font-weight: 500;
         }
 
         /* Weather alerts */
@@ -710,11 +754,18 @@
         }
 
         .alert {
-            background-color: rgba(231, 76, 60, 0.2);
-            border-left: 4px solid var(--accent-color);
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 15px;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
+            border-left: 3px solid var(--accent-color);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .alert:hover {
+            transform: translateX(3px);
+            box-shadow: 0 4px 16px rgba(239, 68, 68, 0.2);
         }
 
         .alert:last-child {
@@ -724,27 +775,37 @@
         .alert-title {
             display: flex;
             align-items: center;
-            font-weight: 500;
-            margin-bottom: 5px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1rem;
         }
 
         .alert-title i {
-            margin-right: 10px;
+            margin-right: 12px;
             color: var(--accent-color);
+            font-size: 1.1rem;
         }
 
         .alert-description {
             font-size: 0.9rem;
             opacity: 0.9;
+            line-height: 1.5;
         }
 
         .no-alerts {
             text-align: center;
-            padding: 20px;
+            padding: 24px;
             opacity: 0.7;
         }
 
-        /* Important links */
+        .no-alerts i {
+            display: block;
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 16px;
+        }
+
+        /* Important links com ícones externos */
         .important-links-container {
             grid-column: span 4;
         }
@@ -764,29 +825,66 @@
         .links-list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         .link-item {
             display: flex;
             align-items: center;
-            padding: 12px;
+            justify-content: space-between;
+            padding: 16px;
             background-color: var(--card-hover);
-            border-radius: 8px;
+            border-radius: 12px;
             text-decoration: none;
             color: var(--text-color);
-            transition: transform 0.3s, background-color 0.3s;
+            transition: all 0.3s ease;
+            border: 1px solid var(--container-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
         }
 
         .link-item:hover {
-            transform: translateX(5px);
-            background-color: var(--primary-color);
+            background-color: var(--secondary-color);
             color: white;
+            transform: translateX(3px);
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.25);
+        }
+
+        .link-content {
+            display: flex;
+            align-items: center;
         }
 
         .link-item i {
-            margin-right: 15px;
+            margin-right: 16px;
             font-size: 1.2rem;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+
+        .link-item:hover i {
+            color: white;
+        }
+
+        .external-icon {
+            font-size: 0.9rem;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        .link-item:hover .external-icon {
+            opacity: 1;
+            color: white;
         }
 
         /* Emergency contacts */
@@ -802,49 +900,73 @@
 
         .emergency-contacts {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 16px;
         }
 
         .contact-card {
             background-color: var(--card-hover);
-            border-radius: 8px;
-            padding: 15px;
+            border-radius: 16px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--container-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--shadow-color);
         }
 
         .contact-card i {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--primary-color);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .contact-card .contact-name {
-            font-weight: 500;
-            margin-bottom: 5px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1rem;
         }
 
         .contact-card .contact-number {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--secondary-color);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            font-weight: 700;
         }
 
         .emergency-tips {
-            margin-top: 20px;
-            padding-top: 15px;
+            margin-top: 24px;
+            padding-top: 20px;
             border-top: 1px solid var(--container-border);
         }
 
         .emergency-tips h3 {
-            margin-bottom: 10px;
+            margin-bottom: 16px;
             color: var(--primary-color);
+            font-size: 1.1rem;
         }
 
         .emergency-tips p {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            line-height: 1.6;
+            font-size: 0.9rem;
         }
 
         /* Sustainability tips */
@@ -860,29 +982,258 @@
 
         .tips-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
         }
 
         .tip-card {
             background-color: var(--card-hover);
-            border-radius: 8px;
-            padding: 15px;
+            border-radius: 16px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--container-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tip-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+        }
+
+        .tip-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--shadow-color);
         }
 
         .tip-card i {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--secondary-color);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .tip-card .tip-title {
-            font-weight: 500;
-            margin-bottom: 10px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--primary-color);
+            font-size: 1rem;
+        }
+
+        .tip-card p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+
+        .more-tips-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--secondary-color), #059669);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            box-shadow: 0 2px 12px rgba(16, 185, 129, 0.25);
+        }
+
+        .more-tips-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Modal styles modernos */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--modal-overlay);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal {
+            background: var(--container-bg);
+            border-radius: 20px;
+            padding: 32px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--container-border);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: #dc2626;
+            transform: scale(1.05);
+        }
+
+        .modal h2 {
+            margin-bottom: 24px;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+
+        /* Chat interface melhorada */
+        .chat-interface {
+            display: flex;
+            flex-direction: column;
+            height: 380px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background-color: var(--card-hover);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            border: 1px solid var(--container-border);
+            scrollbar-width: thin;
+            scrollbar-color: var(--secondary-color) var(--container-bg);
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: var(--container-bg);
+            border-radius: 2px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+        .message {
+            margin-bottom: 16px;
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 16px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .message.user {
+            margin-left: auto;
+            background: linear-gradient(135deg, var(--secondary-color), #059669);
+            color: white;
+            border-radius: 16px 16px 4px 16px;
+        }
+
+        .message.ai {
+            margin-right: auto;
+            background-color: var(--container-border);
+            border-radius: 16px 16px 16px 4px;
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 12px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid var(--container-border);
+            border-radius: 16px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        .chat-input:focus {
+            border-color: var(--secondary-color);
+        }
+
+        .chat-send-btn {
+            background: linear-gradient(135deg, var(--secondary-color), #059669);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 12px rgba(16, 185, 129, 0.25);
+        }
+
+        .chat-send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
         }
 
         /* News */
@@ -899,33 +1250,48 @@
         .news-sources {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
+            gap: 16px;
         }
 
         .news-source {
             background-color: var(--card-hover);
-            border-radius: 8px;
-            padding: 15px;
+            border-radius: 16px;
+            padding: 20px;
             text-align: center;
             text-decoration: none;
             color: var(--text-color);
-            transition: transform 0.3s;
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            border: 1px solid var(--container-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-source::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
         }
 
         .news-source:hover {
-            transform: translateY(-5px);
-            background-color: var(--primary-color);
+            transform: translateY(-2px);
+            background-color: var(--secondary-color);
             color: white;
+            box-shadow: 0 8px 24px var(--shadow-color);
         }
 
         .news-source i {
-            font-size: 2rem;
-            margin-bottom: 10px;
+            font-size: 2.2rem;
+            margin-bottom: 12px;
             color: var(--primary-color);
+            transition: color 0.3s ease;
         }
 
         .news-source:hover i {
@@ -933,7 +1299,8 @@
         }
 
         .news-source .source-name {
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 1rem;
         }
 
         /* Environmental indicators */
@@ -950,37 +1317,71 @@
         .indicators-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
+            gap: 16px;
         }
 
         .indicator-card {
             background-color: var(--card-hover);
-            border-radius: 8px;
-            padding: 15px;
+            border-radius: 16px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--container-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .indicator-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+        }
+
+        .indicator-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--shadow-color);
         }
 
         .indicator-card .indicator-title {
-            font-weight: 500;
-            margin-bottom: 10px;
+            font-weight: 600;
+            margin-bottom: 12px;
             color: var(--primary-color);
+            font-size: 1rem;
         }
 
         .indicator-card .indicator-value {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            color: var(--secondary-color);
         }
 
         .indicator-card .indicator-description {
             font-size: 0.9rem;
             opacity: 0.8;
+            line-height: 1.5;
         }
 
-        /* Footer */
+        /* Footer moderno */
         footer {
             background-color: var(--container-bg);
             padding: 40px 20px;
             margin-top: 40px;
+            border-top: 1px solid var(--container-border);
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
         }
 
         .footer-content {
@@ -988,18 +1389,20 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            gap: 32px;
         }
 
         .footer-section h3 {
             color: var(--primary-color);
             margin-bottom: 20px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
         .footer-section p {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             line-height: 1.6;
+            opacity: 0.9;
+            font-size: 0.9rem;
         }
 
         .footer-section ul {
@@ -1007,21 +1410,26 @@
         }
 
         .footer-section ul li {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+            font-size: 0.9rem;
         }
 
-        .footer-section ul li:before {
+        .footer-section ul li::before {
             content: "•";
             color: var(--secondary-color);
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1rem;
         }
 
         .footer-bottom {
             text-align: center;
-            padding-top: 30px;
-            margin-top: 30px;
+            padding-top: 24px;
+            margin-top: 24px;
             border-top: 1px solid var(--container-border);
             font-size: 0.9rem;
             opacity: 0.8;
@@ -1037,53 +1445,86 @@
         @media (max-width: 768px) {
             .grid {
                 grid-template-columns: repeat(1, 1fr);
+                gap: 16px;
+            }
+
+            main {
+                padding: 0 16px;
+                margin: 20px auto;
+            }
+
+            .container {
+                padding: 20px;
             }
 
             header {
                 flex-direction: column;
                 align-items: flex-start;
+                padding: 16px;
             }
 
             nav {
-                margin-top: 15px;
+                margin-top: 12px;
                 width: 100%;
+                display: none;
+            }
+
+            nav.active {
+                display: block;
+                animation: slideDown 0.3s ease;
             }
 
             nav ul {
                 flex-direction: column;
-                gap: 10px;
+                gap: 6px;
             }
 
             nav ul li {
                 margin-left: 0;
             }
 
+            nav ul li a {
+                display: block;
+                padding: 12px 16px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+            }
+
             .mobile-menu-btn {
                 display: block;
                 position: absolute;
-                top: 15px;
-                right: 20px;
-            }
-
-            nav {
-                display: none;
-            }
-
-            nav.active {
-                display: block;
+                top: 16px;
+                right: 16px;
             }
 
             .theme-toggle {
-                margin-top: 15px;
+                margin-top: 12px;
+            }
+
+            .temperature {
+                font-size: 2.5rem;
+            }
+
+            .current-time {
+                font-size: 2.2rem;
+            }
+
+            .search-input-container {
+                min-width: 100%;
+            }
+
+            .modal {
+                padding: 20px;
+                margin: 12px;
             }
         }
 
-        /* Loading spinner */
+        /* Loading spinner moderno */
         .loader {
             display: inline-block;
-            width: 30px;
-            height: 30px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
+            width: 32px;
+            height: 32px;
+            border: 2px solid rgba(59, 130, 246, 0.2);
             border-radius: 50%;
             border-top-color: var(--primary-color);
             animation: spin 1s ease-in-out infinite;
@@ -1099,10 +1540,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 32px;
         }
 
-        /* Scrollbar */
+        /* Scrollbar moderna */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
@@ -1110,15 +1551,37 @@
 
         ::-webkit-scrollbar-track {
             background: var(--container-bg);
+            border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--container-border);
+            background: var(--secondary-color);
             border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-color);
+            background: #059669;
+        }
+
+        /* Prevent scrolling when modal is open */
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        /* Micro-interactions e detalhes modernos */
+        .container, .forecast-card, .tip-card, .contact-card, .news-source, .indicator-card, .link-item {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Gradientes sutis para profundidade */
+        .search-btn, .ai-chat-btn, .more-tips-btn, .chat-send-btn {
+            background: linear-gradient(135deg, var(--secondary-color), #059669);
+            box-shadow: 0 2px 12px rgba(16, 185, 129, 0.2);
+        }
+
+        /* Efeitos de hover mais suaves */
+        .container:hover, .forecast-card:hover, .tip-card:hover, .contact-card:hover, .news-source:hover, .indicator-card:hover {
+            transform: translateY(-3px);
         }
     </style>
 </head>
@@ -1139,7 +1602,6 @@
                 <li><a href="#clima">Clima</a></li>
                 <li><a href="#mapa">Mapa</a></li>
                 <li><a href="#previsao">Previsão</a></li>
-                <li><a href="#ia">IA</a></li>
                 <li><a href="#alertas">Alertas</a></li>
                 <li><a href="#links">Links</a></li>
             </ul>
@@ -1183,7 +1645,7 @@
                 </div>
             </div>
             
-            <!-- Weather info -->
+            <!-- Weather info com qualidade do ar integrada - MENOR -->
             <div class="container weather-info" id="clima">
                 <h2>Clima Atual</h2>
                 <div id="current-weather-container">
@@ -1193,16 +1655,17 @@
                 </div>
             </div>
             
-            <!-- Map -->
+            <!-- Map - MAIOR -->
             <div class="container map-container" id="mapa">
                 <h2>Mapa Ambiental</h2>
-                <div id="map"></div>
+                <!-- Controles ACIMA do mapa -->
                 <div class="map-controls">
                     <button class="map-control-btn active" data-layer="map">Mapa</button>
                     <button class="map-control-btn" data-layer="temp">Temperatura</button>
                     <button class="map-control-btn" data-layer="wind">Vento</button>
                     <button class="map-control-btn" data-layer="precipitation">Precipitação</button>
                 </div>
+                <div id="map"></div>
             </div>
             
             <!-- Forecast -->
@@ -1218,25 +1681,7 @@
             <!-- Hourly forecast -->
             <div class="container hourly-forecast-container">
                 <h2>Previsão para as Próximas Horas</h2>
-                <div id="hourly-forecast" class="hourly-cards"></div>
-            </div>
-            
-            <!-- AI Chat -->
-            <div class="container ai-chat-container" id="ia">
-                <h2>Conversar com a IA</h2>
-                <div class="chat-interface">
-                    <div class="chat-messages" id="chat-messages">
-                        <div class="message ai">
-                            Olá! Sou o assistente climático do RSAlerta. Como posso ajudar você hoje com informações sobre clima, prevenção de enchentes ou sustentabilidade?
-                        </div>
-                    </div>
-                    <div class="chat-input-container">
-                        <input type="text" class="chat-input" id="chat-input" placeholder="Digite sua mensagem...">
-                        <button class="chat-send-btn" id="chat-send-btn">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </div>
-                </div>
+                <div id="hourly-forecast" class="forecast-scroll-container"></div>
             </div>
             
             <!-- Date and time -->
@@ -1253,7 +1698,7 @@
                 <h2>Alertas Climáticos</h2>
                 <div id="weather-alerts">
                     <div class="no-alerts">
-                        <i class="fas fa-check-circle" style="font-size: 2rem; color: var(--secondary-color); margin-bottom: 15px;"></i>
+                        <i class="fas fa-check-circle"></i>
                         <p>Não há alertas ativos no momento.</p>
                     </div>
                 </div>
@@ -1264,16 +1709,25 @@
                 <h2>Links Importantes</h2>
                 <div class="links-list">
                     <a href="https://www.defesacivil.rs.gov.br/inicial" target="_blank" class="link-item">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <span>Alertas de mau tempo</span>
+                        <div class="link-content">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Alertas de mau tempo</span>
+                        </div>
+                        <i class="fas fa-external-link-alt external-icon"></i>
                     </a>
                     <a href="https://www.gov.br/pt-br/servicos/solicitar-cadastro-para-recebimento-de-avisos-e-alertas-de-desastres" target="_blank" class="link-item">
-                        <i class="fas fa-bell"></i>
-                        <span>Me cadastrar para receber avisos</span>
+                        <div class="link-content">
+                            <i class="fas fa-bell"></i>
+                            <span>Me cadastrar para receber avisos</span>
+                        </div>
+                        <i class="fas fa-external-link-alt external-icon"></i>
                     </a>
                     <a href="https://portal.inmet.gov.br/" target="_blank" class="link-item">
-                        <i class="fas fa-cloud-sun"></i>
-                        <span>Portal INMET</span>
+                        <div class="link-content">
+                            <i class="fas fa-cloud-sun"></i>
+                            <span>Portal INMET</span>
+                        </div>
+                        <i class="fas fa-external-link-alt external-icon"></i>
                     </a>
                 </div>
             </div>
@@ -1337,7 +1791,21 @@
                         <div class="tip-title">Plantio de Árvores</div>
                         <p>Plante árvores nativas para ajudar na absorção da água da chuva e prevenir enchentes.</p>
                     </div>
+                    <div class="tip-card">
+                        <i class="fas fa-bicycle"></i>
+                        <div class="tip-title">Transporte Sustentável</div>
+                        <p>Use bicicleta, transporte público ou caminhe para reduzir a emissão de gases poluentes.</p>
+                    </div>
+                    <div class="tip-card">
+                        <i class="fas fa-leaf"></i>
+                        <div class="tip-title">Consumo Consciente</div>
+                        <p>Compre apenas o necessário e prefira produtos locais e orgânicos.</p>
+                    </div>
                 </div>
+                <button class="more-tips-btn" id="more-tips-btn">
+                    <i class="fas fa-plus-circle"></i>
+                    Ver Mais Dicas
+                </button>
             </div>
             
             <!-- News -->
@@ -1391,6 +1859,81 @@
             </div>
         </div>
     </main>
+
+    <!-- Modal para mais dicas de sustentabilidade -->
+    <div class="modal-overlay" id="sustainability-modal">
+        <div class="modal">
+            <button class="modal-close" id="close-sustainability-modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2>Mais Dicas de Sustentabilidade</h2>
+            <div class="tips-list">
+                <div class="tip-card">
+                    <i class="fas fa-solar-panel"></i>
+                    <div class="tip-title">Energia Solar</div>
+                    <p>Considere instalar painéis solares em sua casa para gerar energia limpa e renovável.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-shopping-bag"></i>
+                    <div class="tip-title">Sacolas Reutilizáveis</div>
+                    <p>Use sacolas de pano ou reutilizáveis ao fazer compras, evitando o uso de sacolas plásticas.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-water"></i>
+                    <div class="tip-title">Captação de Água da Chuva</div>
+                    <p>Instale sistemas de captação de água da chuva para regar plantas e lavar áreas externas.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-utensils"></i>
+                    <div class="tip-title">Compostagem</div>
+                    <p>Transforme restos de comida em adubo orgânico através da compostagem doméstica.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-thermometer-half"></i>
+                    <div class="tip-title">Isolamento Térmico</div>
+                    <p>Melhore o isolamento térmico de sua casa para reduzir o consumo de energia com aquecimento e refrigeração.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-tree"></i>
+                    <div class="tip-title">Jardim Vertical</div>
+                    <p>Crie jardins verticais em casa para melhorar a qualidade do ar e reduzir a temperatura ambiente.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <div class="tip-title">Tecnologia Sustentável</div>
+                    <p>Mantenha seus dispositivos eletrônicos por mais tempo e recicle adequadamente quando necessário.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-carrot"></i>
+                    <div class="tip-title">Horta Caseira</div>
+                    <p>Cultive seus próprios alimentos em casa, reduzindo o impacto do transporte e embalagens.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para IA -->
+    <div class="modal-overlay" id="ai-modal">
+        <div class="modal">
+            <button class="modal-close" id="close-ai-modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2>Conversar com a IA</h2>
+            <div class="chat-interface">
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message ai">
+                        Olá! Sou o assistente climático do RSAlerta. Como posso ajudar você hoje com informações sobre clima, prevenção de enchentes ou sustentabilidade?
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" class="chat-input" id="chat-input" placeholder="Digite sua mensagem...">
+                    <button class="chat-send-btn" id="chat-send-btn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <!-- Footer -->
     <footer>
@@ -1412,7 +1955,7 @@
                 <h3>Fontes</h3>
                 <ul>
                     <li>OpenWeatherMap API</li>
-                    <li>OpenAI API (via Netlify Function)</li> <!-- ATUALIZADO -->
+                    <li>OpenAI API (via Netlify Function)</li>
                     <li>INMET - Instituto Nacional de Meteorologia</li>
                     <li>Defesa Civil do Rio Grande do Sul</li>
                     <li>Secretaria do Meio Ambiente do RS</li>
@@ -1434,7 +1977,6 @@
     <script>
         // Global variables
         const API_KEY = '87b42475468c3ba9298cf245b2fa9379';
-        // const OPENAI_API_KEY = 'SUA_CHAVE_API_REMOVIDA_DAQUI'; // <<== REMOVIDO
         let currentCity = 'Porto Alegre, RS, Brasil';
         let currentCoords = { lat: -30.0346, lng: -51.2177 }; // Porto Alegre default
         let map;
@@ -1460,6 +2002,13 @@
         const cityChips = document.querySelectorAll('.city-chip');
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const nav = document.querySelector('nav');
+        
+        // Modal elements
+        const sustainabilityModal = document.getElementById('sustainability-modal');
+        const aiModal = document.getElementById('ai-modal');
+        const moreTipsBtn = document.getElementById('more-tips-btn');
+        const closeSustainabilityModal = document.getElementById('close-sustainability-modal');
+        const closeAiModal = document.getElementById('close-ai-modal');
         
         // Theme toggle buttons
         const darkThemeBtn = document.getElementById('dark-theme-btn');
@@ -1660,12 +2209,11 @@
             citySuggestions.classList.add('active');
         }
         
-        // Update current weather display
+        // Update current weather display com qualidade do ar integrada
         function updateCurrentWeather() {
             if (!currentWeatherData) return;
             
             const weather = currentWeatherData;
-            const airQuality = airQualityData?.list?.[0]?.main?.aqi || 0;
             
             const weatherIconUrl = `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`;
             const temperature = Math.round(weather.main.temp);
@@ -1676,7 +2224,8 @@
             const minTemp = Math.round(weather.main.temp_min);
             const maxTemp = Math.round(weather.main.temp_max);
             
-            // Air quality index text
+            // Air quality data
+            const airQuality = airQualityData?.list?.[0]?.main?.aqi || 0;
             const airQualityText = getAirQualityText(airQuality);
             const airQualityPercentage = (airQuality / 5) * 100;
             
@@ -1705,7 +2254,7 @@
                         <span>Min/Max: ${minTemp}°C / ${maxTemp}°C</span>
                     </div>
                 </div>
-                <div class="air-quality">
+                <div class="air-quality-section">
                     <h3>Qualidade do Ar</h3>
                     <div class="air-quality-indicator">
                         <span>Boa</span>
@@ -1714,9 +2263,9 @@
                         </div>
                         <span>Ruim</span>
                     </div>
-                    <p style="text-align: center; margin-top: 10px;">${airQualityText}</p>
+                    <div class="air-quality-text">${airQualityText}</div>
                 </div>
-                <button class="ai-chat-btn" onclick="document.getElementById('ia').scrollIntoView({behavior: 'smooth'})">
+                <button class="ai-chat-btn" onclick="openAiModal()">
                     <i class="fas fa-robot"></i> Conversar com a IA
                 </button>
             `;
@@ -1767,7 +2316,7 @@
             const dailyForecast = Object.values(dailyData).slice(0, 5);
             
             // Create HTML for daily forecast
-            let forecastHTML = '<div class="daily-forecast">';
+            let forecastHTML = '<div class="forecast-scroll-container">';
             
             dailyForecast.forEach(day => {
                 const dayName = getDayName(day.date);
@@ -1791,7 +2340,7 @@
                     <div class="forecast-card">
                         <div class="day">${dayName}</div>
                         <img src="https://openweathermap.org/img/wn/${mostFrequentIcon}@2x.png" alt="${mostFrequentDescription}">
-                        <div class="forecast-description">${mostFrequentDescription.charAt(0).toUpperCase() + mostFrequentDescription.slice(1)}</div>
+                        <div class="description">${mostFrequentDescription.charAt(0).toUpperCase() + mostFrequentDescription.slice(1)}</div>
                         <div class="temp-range">
                             <div class="temp-max">${maxTemp}°</div>
                             <div class="temp-min">${minTemp}°</div>
@@ -1824,7 +2373,7 @@
                 const icon = item.weather[0].icon;
                 
                 const card = document.createElement('div');
-                card.className = 'hourly-card';
+                card.className = 'forecast-card';
                 card.innerHTML = `
                     <div class="hour">${hour}</div>
                     <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="${description}">
@@ -1843,7 +2392,7 @@
             if (alerts.length === 0) {
                 weatherAlertsContainer.innerHTML = `
                     <div class="no-alerts">
-                        <i class="fas fa-check-circle" style="font-size: 2rem; color: var(--secondary-color); margin-bottom: 15px;"></i>
+                        <i class="fas fa-check-circle"></i>
                         <p>Não há alertas ativos no momento.</p>
                     </div>
                 `;
@@ -1865,6 +2414,35 @@
             });
             
             weatherAlertsContainer.innerHTML = alertsHTML;
+        }
+        
+        // Modal functions
+        function openSustainabilityModal() {
+            sustainabilityModal.classList.add('active');
+            document.body.classList.add('modal-open');
+        }
+        
+        function closeSustainabilityModalFunc() {
+            sustainabilityModal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+        }
+        
+        function openAiModal() {
+            // Scroll down to avoid map bugs
+            window.scrollTo({
+                top: document.body.scrollHeight * 0.3,
+                behavior: 'smooth'
+            });
+            
+            setTimeout(() => {
+                aiModal.classList.add('active');
+                document.body.classList.add('modal-open');
+            }, 300);
+        }
+        
+        function closeAiModalFunc() {
+            aiModal.classList.remove('active');
+            document.body.classList.remove('modal-open');
         }
         
         // Send message to AI
@@ -1966,62 +2544,55 @@
                     content: message
                 });
                 
-                // === INÍCIO DA MODIFICAÇÃO ===
-                // Faça a chamada para a sua função Netlify
-                const response = await fetch('/.netlify/functions/fetch-openai', { // URL ATUALIZADA
+                // Make API call to Netlify function
+                const response = await fetch('/.netlify/functions/fetch-openai', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        // A Chave API NÃO é mais enviada daqui
                     },
                     body: JSON.stringify({
-                        model: 'gpt-4.1-nano-2025-04-14', // Você pode manter isso ou passar dinamicamente
+                        model: 'gpt-4.1-nano-2025-04-14',
                         messages: conversationHistory,
-                        temperature: 0.7 // Você pode manter isso ou passar dinamicamente
+                        temperature: 0.7
                     })
                 });
                 
-                const data = await response.json(); // 'data' é o corpo da resposta da sua função Netlify
+                const data = await response.json();
                 
-                // Remova o indicador de carregamento
+                // Remove loading indicator
                 const loadingElement = document.getElementById(loadingId);
                 if (loadingElement) {
                     loadingElement.remove();
                 }
 
-                // Verifique se a chamada para a função Netlify foi bem-sucedida
                 if (!response.ok) {
-                    // 'data' pode conter um objeto de erro da sua função Netlify ou da API OpenAI
                     const errorMessage = data.error || `Erro: ${response.status} ${response.statusText}`;
                     throw new Error(errorMessage);
                 }
 
-                // A resposta da OpenAI estará dentro de 'data', conforme retornado pela sua função
-                // Exemplo: data.choices[0].message.content
                 if (data.choices && data.choices[0] && data.choices[0].message) {
                     const aiResponse = data.choices[0].message.content;
                     addMessageToChat(aiResponse, 'ai');
 
-                    // Atualize o histórico do chat
+                    // Update chat history
                     chatHistory.push({ role: 'user', content: message });
                     chatHistory.push({ role: 'assistant', content: aiResponse });
                     
-                    // Limite o histórico (permanece o mesmo)
+                    // Limit history
                     if (chatHistory.length > 10) {
                         chatHistory = chatHistory.slice(chatHistory.length - 10);
                     }
-                } else if (data.error) { // Se a API OpenAI retornou um erro através da sua função (ou a própria função Netlify)
-                    throw new Error(data.error.message || data.error); // Ajuste conforme a estrutura de erro
+                } else if (data.error) {
+                    throw new Error(data.error.message || data.error);
                 } else {
                     throw new Error('Estrutura de resposta inesperada do serviço de IA.');
                 }
-                // === FIM DA MODIFICAÇÃO ===
                 
             } catch (error) {
                 console.error('Erro ao enviar mensagem para IA ou processar resposta:', error);
                 
-                // Remova o indicador de carregamento
-                const loadingElement = document.getElementById(loadingId); // Certifique-se que loadingId está definido
+                // Remove loading indicator
+                const loadingElement = document.getElementById(loadingId);
                 if (loadingElement) {
                     loadingElement.remove();
                 }
@@ -2110,8 +2681,6 @@
             
             // Save theme preference
             localStorage.setItem('theme', theme);
-            
-            // No need to update chart since we're using cards now
         }
         
         // Setup event listeners
@@ -2173,6 +2742,36 @@
                 }
             });
             
+            // Modal event listeners
+            moreTipsBtn.addEventListener('click', openSustainabilityModal);
+            closeSustainabilityModal.addEventListener('click', closeSustainabilityModalFunc);
+            closeAiModal.addEventListener('click', closeAiModalFunc);
+            
+            // Close modals when clicking overlay
+            sustainabilityModal.addEventListener('click', (e) => {
+                if (e.target === sustainabilityModal) {
+                    closeSustainabilityModalFunc();
+                }
+            });
+            
+            aiModal.addEventListener('click', (e) => {
+                if (e.target === aiModal) {
+                    closeAiModalFunc();
+                }
+            });
+            
+            // Close modals with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (sustainabilityModal.classList.contains('active')) {
+                        closeSustainabilityModalFunc();
+                    }
+                    if (aiModal.classList.contains('active')) {
+                        closeAiModalFunc();
+                    }
+                }
+            });
+            
             // Theme toggle buttons
             darkThemeBtn.addEventListener('click', () => setTheme('dark'));
             lightThemeBtn.addEventListener('click', () => setTheme('light'));
@@ -2207,3 +2806,4 @@
     </script>
 </body>
 </html>
+
