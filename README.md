@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://rsalerta.netlify.app/"><strong>Acesse a Landing Page do Projeto »</strong></a>
+  <a href="https://rsalerta.netlify.app/"><strong>Acesse o site do projeto »</strong></a>
 </p>
 
 <p align="center">
