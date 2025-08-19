@@ -1,7 +1,7 @@
 # RS Alerta 🛡️💧
 
 <p align="center">
-  <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop" alt="Banner do RS Alerta mostrando tecnologia e dados" width="600"/>
+  <img src="https://github.com/elias001011/RSAlerta/blob/main/screenshot.png" alt="Banner do RS Alerta mostrando tecnologia e dados" width="600"/>
 </p>
 
 <p align="center">
