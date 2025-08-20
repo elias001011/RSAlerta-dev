@@ -23,10 +23,13 @@ O Rio Grande do Sul possui um histórico de vulnerabilidade a eventos climático
 ## 🛠️ Funcionalidades
 
 ### 🌤️ Monitoramento Climático
-- **Clima Atual**: Informações em tempo real sobre temperatura, umidade, vento e sensação térmica
+- **Clima Atual**: Informações em tempo real da API do OpenWeatherMap sobre temperatura, umidade, vento e sensação térmica
 - **Previsão Meteorológica**: Dados para os próximos dias e horas
 - **Pesquisa por Cidade**: Consulta personalizada por localização
 - **Mapa Ambiental**: Visualização geográfica das condições climáticas
+
+### 🤖 IA
+-**IA Integrada**: Tenha uma análise das informações do site providas em tempo real para conversar e tirar dúvidas sobre elas (Caso queira consultar informações para sua localidade usando a IA, mude a localização no app).
 
 ### 🚨 Sistema de Alertas
 - **Alertas Climáticos**: Notificações sobre condições meteorológicas perigosas
@@ -61,6 +64,7 @@ Acesso rápido aos principais serviços de emergência:
 - **Elias Juriatti Rodrigues Nunes**
 - **Richard Albuquerque Couto** 
 - **Fernanda Damasceno Maragno**
+- **Guilherme Zatti**
 
 ## 🏫 Instituição
 
@@ -76,8 +80,8 @@ Acesso rápido aos principais serviços de emergência:
 
 ## 📞 Suporte
 
-Para mais informações sobre o projeto ou suporte técnico, entre em contato através dos canais disponibilizados na plataforma.
+Para mais informações sobre o projeto ou suporte técnico, entre em contato através do instagram @elias_jrnunes
 
 ---
 
-*Desenvolvido com 💚 para proteger o Rio Grande do Sul dos eventos climáticos extremos.*
+*Desenvolvido com 💚 para promover a informação a todos os Gaúchos contra os eventos climáticos extremos.*
