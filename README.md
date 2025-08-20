@@ -29,7 +29,7 @@ O Rio Grande do Sul possui um histórico de vulnerabilidade a eventos climático
 - **Mapa Ambiental**: Visualização geográfica das condições climáticas
 
 ### 🤖 IA
--**IA Integrada**: Tenha uma análise das informações do site providas em tempo real para conversar e tirar dúvidas sobre elas (Caso queira consultar informações para sua localidade usando a IA, mude a localização no app).
+- **IA Integrada**: Tenha uma análise das informações do site providas em tempo real para conversar e tirar dúvidas sobre elas (Caso queira consultar informações para sua localidade usando a IA, mude a localização no app).
 
 ### 🚨 Sistema de Alertas
 - **Alertas Climáticos**: Notificações sobre condições meteorológicas perigosas
