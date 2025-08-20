@@ -1977,7 +1977,7 @@
     <!-- Main JavaScript -->
     <script>
         // Global variables
-        const API_KEY = '87b42475468c3ba9298cf245b2fa9379';
+        let weatherApiKey = null; // Irá guardar a chave da API para a camada do mapa
         let currentCity = 'Porto Alegre, RS, Brasil';
         let currentCoords = { lat: -30.0346, lng: -51.2177 }; // Porto Alegre default
         let map;
@@ -2017,7 +2017,8 @@
         const translucentThemeBtn = document.getElementById('translucent-theme-btn');
         
         // Initialize the application
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
+            await fetchApiKey(); // Busca a chave da API primeiro
             initMap();
             updateDateTime();
             setInterval(updateDateTime, 1000);
@@ -2028,6 +2029,21 @@
             const savedTheme = localStorage.getItem('theme') || 'dark';
             setTheme(savedTheme);
         });
+
+        // Nova função para buscar a chave da API do backend
+        async function fetchApiKey() {
+            try {
+                const response = await fetch('/.netlify/functions/get-api-key');
+                if (!response.ok) {
+                    throw new Error('Não foi possível buscar a chave da API');
+                }
+                const data = await response.json();
+                weatherApiKey = data.apiKey;
+            } catch (error) {
+                console.error('Erro ao buscar a chave da API:', error);
+                // Você pode adicionar um tratamento de erro aqui, como mostrar uma mensagem ao usuário
+            }
+        }
         
         // Initialize Leaflet map
         function initMap() {
@@ -2063,6 +2079,11 @@
         
         // Change map layer based on selection
         function changeMapLayer(layerType) {
+            if (!weatherApiKey) {
+                console.error("A chave da API para os tiles do mapa não está disponível.");
+                return; // Não prosseguir se a chave não foi buscada
+            }
+
             // Remove existing weather layer if any
             if (weatherLayer) {
                 map.removeLayer(weatherLayer);
@@ -2074,7 +2095,7 @@
             }
             
             // Add the selected weather layer
-            const layerUrl = `https://tile.openweathermap.org/map/${getLayerCode(layerType)}/{z}/{x}/{y}.png?appid=${API_KEY}`;
+            const layerUrl = `https://tile.openweathermap.org/map/${getLayerCode(layerType)}/{z}/{x}/{y}.png?appid=${weatherApiKey}`;
             
             weatherLayer = L.tileLayer(layerUrl, {
                 attribution: '&copy; OpenWeatherMap',
@@ -2108,17 +2129,22 @@
                 currentCoords = coords;
                 updateMapMarker();
                 
-                // Get current weather
-                const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${coords.lat}&lon=${coords.lng}&appid=${API_KEY}&units=metric&lang=pt_br`);
+                // Get current weather via Netlify function
+                const weatherResponse = await fetch(`/.netlify/functions/fetch-weather?endpoint=weather&lat=${coords.lat}&lon=${coords.lng}`);
                 currentWeatherData = await weatherResponse.json();
                 
-                // Get 5-day forecast
-                const forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${coords.lat}&lon=${coords.lng}&appid=${API_KEY}&units=metric&lang=pt_br`);
+                // Get 5-day forecast via Netlify function
+                const forecastResponse = await fetch(`/.netlify/functions/fetch-weather?endpoint=forecast&lat=${coords.lat}&lon=${coords.lng}`);
                 forecastData = await forecastResponse.json();
                 
-                // Get air quality
-                const airQualityResponse = await fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${coords.lat}&lon=${coords.lng}&appid=${API_KEY}`);
+                // Get air quality via Netlify function
+                const airQualityResponse = await fetch(`/.netlify/functions/fetch-weather?endpoint=air_pollution&lat=${coords.lat}&lon=${coords.lng}`);
                 airQualityData = await airQualityResponse.json();
+
+                // Verifica se alguma das respostas da API retornou um erro
+                if (currentWeatherData.error || forecastData.error || airQualityData.error) {
+                    throw new Error(currentWeatherData.error || forecastData.error || airQualityData.error);
+                }
                 
                 // Update UI with weather data
                 updateCurrentWeather();
@@ -2145,7 +2171,7 @@
         // Get coordinates for a city name
         async function getCoordinates(cityName) {
             try {
-                const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(cityName)}&limit=1&appid=${API_KEY}`);
+                const response = await fetch(`/.netlify/functions/fetch-weather?endpoint=direct&q=${encodeURIComponent(cityName)}&limit=1`);
                 const data = await response.json();
                 
                 if (data && data.length > 0) {
@@ -2169,7 +2195,7 @@
             }
             
             try {
-                const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(query)}&limit=5&appid=${API_KEY}`);
+                const response = await fetch(`/.netlify/functions/fetch-weather?endpoint=direct&q=${encodeURIComponent(query)}&limit=5`);
                 const data = await response.json();
                 
                 if (data && data.length > 0) {
@@ -2184,6 +2210,11 @@
                 citySuggestions.classList.add('active');
             }
         }
+        
+        // O restante do seu código JavaScript permanece o mesmo...
+        // (renderCitySuggestions, updateCurrentWeather, getAirQualityText, etc.)
+        // Cole o restante do seu script original a partir da função renderCitySuggestions aqui.
+        // Omitido para brevidade, pois não há mais alterações.
         
         // Render city suggestions
         function renderCitySuggestions(cities) {
