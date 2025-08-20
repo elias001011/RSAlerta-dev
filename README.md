@@ -1,96 +1,83 @@
-# RS Alerta 🛡️💧
+# RSAlerta
 
 <p align="center">
   <img src="https://github.com/elias001011/RSAlerta/blob/main/screenshot.png" alt="Banner do RS Alerta mostrando tecnologia e dados" width="600"/>
 </p>
 
-<p align="center">
-  Uma plataforma inovadora de monitoramento climático e prevenção contra enchentes, desenvolvida com foco na segurança e resiliência da população do Rio Grande do Sul.
-</p>
+## 📋 Sobre o Projeto
+
+O **RSAlerta** é uma plataforma digital interativa desenvolvida para monitoramento climático, emissão de alertas e orientações preventivas contra desastres naturais, com foco específico nas enchentes no Rio Grande do Sul.
 
 <p align="center">
   <a href="https://rsalerta.netlify.app/"><strong>Acesse o site do projeto »</strong></a>
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/status-em%20desenvolvimento-yellowgreen" alt="Status do Projeto"/>
-  <img src="https://img.shields.io/badge/licen%C3%A7a-MIT-blue" alt="Licença MIT"/>
-</p>
+## 🎯 Objetivo
+
+Desenvolver uma ferramenta de inteligência artificial que ofereça análises e orientações personalizadas aos usuários sobre a situação climática, contribuindo para a prevenção e resposta a eventos climáticos extremos no estado do Rio Grande do Sul.
+
+## ⚡ Contexto
+
+O Rio Grande do Sul possui um histórico de vulnerabilidade a eventos climáticos extremos, que têm se intensificado com frequência cada vez maior. A catástrofe de abril e maio de 2024 representa um marco trágico, consolidando-se como o maior desastre climático da história do estado e um dos maiores do Brasil.
+
+## 🛠️ Funcionalidades
+
+### 🌤️ Monitoramento Climático
+- **Clima Atual**: Informações em tempo real sobre temperatura, umidade, vento e sensação térmica
+- **Previsão Meteorológica**: Dados para os próximos dias e horas
+- **Pesquisa por Cidade**: Consulta personalizada por localização
+- **Mapa Ambiental**: Visualização geográfica das condições climáticas
+
+### 🚨 Sistema de Alertas
+- **Alertas Climáticos**: Notificações sobre condições meteorológicas perigosas
+- **Qualidade do Ar**: Monitoramento e classificação da qualidade atmosférica
+
+### 🆘 Contatos de Emergência
+Acesso rápido aos principais serviços de emergência:
+- SAMU (192)
+- Bombeiros (193)
+- Defesa Civil (199)
+- Polícia (190)
+
+### 🌱 Sustentabilidade
+- **Dicas Ambientais**: Orientações para práticas sustentáveis
+- **Economia de Água**: Sugestões para uso consciente dos recursos
+- **Energia Limpa**: Informações sobre fontes renováveis
+- **Reciclagem**: Orientações sobre descarte consciente
+- **Transporte Sustentável**: Alternativas de mobilidade
+
+### 📊 Indicadores Ambientais do RS
+- **Cobertura Florestal**: 17.5% do território coberto por florestas nativas
+- **Recursos Hídricos**: 83% dos corpos hídricos em boas condições
+- **Áreas Protegidas**: 2.8% do território em unidades de conservação
+- **Espécies Ameaçadas**: 280 espécies de fauna e flora em risco
+
+### 📰 Centro de Informações
+- **Notícias**: Atualizações sobre eventos climáticos e ambientais
+- **Links Importantes**: Recursos adicionais e canais oficiais
+
+## 👥 Desenvolvedores
+
+- **Elias Juriatti Rodrigues Nunes**
+- **Richard Albuquerque Couto** 
+- **Fernanda Damasceno Maragno**
+
+## 🏫 Instituição
+
+**Escola Estadual de Ensino Médio Dr. Aldo Conte**
+
+*Mostra Científica: Criando Caminhos para a Sustentabilidade – Rumo a COP 30*
+
+## 🚀 Tecnologias
+
+- Frontend: HTML, CSS, JavaScript
+- Deploy: Netlify
+- APIs de Clima e Dados Ambientais
+
+## 📞 Suporte
+
+Para mais informações sobre o projeto ou suporte técnico, entre em contato através dos canais disponibilizados na plataforma.
 
 ---
 
-## 📋 Índice
-
-- [Sobre o Projeto](#-sobre-o-projeto)
-  - [O Problema](#-o-problema)
-  - [A Solução](#-a-solução)
-- [🚀 Principais Funcionalidades](#-principais-funcionalidades)
-- [🛠️ Tecnologias Utilizadas](#️-tecnologias-utilizadas)
-- [👨‍💻 A Equipe](#-a-equipe)
-- [🎓 Contexto Acadêmico](#-contexto-acadêmico)
-
----
-
-## 📖 Sobre o Projeto
-
-[span_0](start_span)[span_1](start_span)O **RS Alerta** é uma resposta tecnológica direta aos desafios impostos por eventos climáticos extremos no Rio Grande do Sul[span_0](end_span)[span_1](end_span). [span_2](start_span)[span_3](start_span)A meta do projeto é trocar a reação a desastres por uma cultura de prevenção, usando dados e inteligência artificial para proteger vidas e propriedades[span_2](end_span)[span_3](end_span).
-
-### 🌪️ O Problema
-
-[span_4](start_span)O Rio Grande do Sul tem um histórico de vulnerabilidade a eventos climáticos extremos que têm se intensificado e ocorrido com maior frequência[span_4](end_span). [span_5](start_span)O desastre de abril e maio de 2024 foi o maior desastre climático na história do estado e um dos maiores no Brasil[span_5](end_span). [span_6](start_span)Chuvas torrenciais resultaram em volumes de precipitação sem precedentes, e 478 dos 497 municípios gaúchos foram afetados, impactando a vida de cerca de 2,4 milhões de pessoas[span_6](end_span). [span_7](start_span)A tragédia resultou em mais de 180 mortes e dezenas de desaparecidos, além de centenas de milhares de desabrigados ou desalojados[span_7](end_span). [span_8](start_span)[span_9](start_span)Uma análise da Agência Nacional de Águas (ANA) sobre a catástrofe de 2024 identificou que a principal falha não foi a ausência de dados, mas sim uma falha na comunicação de risco para a população[span_8](end_span)[span_9](end_span). [span_10](start_span)O conhecimento técnico existe, mas não se traduz em ações preventivas por parte dos cidadãos[span_10](end_span).
-
-### ✨ A Solução
-
-[span_11](start_span)[span_12](start_span)O projeto RS Alerta foi desenvolvido para solucionar essa lacuna na comunicação[span_11](end_span)[span_12](end_span). [span_13](start_span)A plataforma foi projetada para atuar na etapa mais crítica e muitas vezes ignorada: traduzir informações técnicas em um poder de decisão para os cidadãos[span_13](end_span). [span_14](start_span)[span_15](start_span)[span_16](start_span)O RS Alerta centraliza dados de fontes oficiais como o INMET e a Defesa Civil e os converte em uma interface acessível que inclui mapas de risco interativos, alertas fáceis de entender e guias de ação práticos[span_14](end_span)[span_15](end_span)[span_16](end_span). [span_17](start_span)[span_18](start_span)Além disso, a plataforma conta com a implementação de um assistente de inteligência artificial para oferecer orientações personalizadas e confiáveis em situações de emergência[span_17](end_span)[span_18](end_span).
-
----
-
-## 🚀 Principais Funcionalidades
-
--   **[span_19](start_span)Monitoramento em Tempo Real:** A plataforma integra e disponibiliza dados meteorológicos e hidrológicos em tempo real para consulta por cidade, incluindo informações sobre precipitação, temperatura, vento e qualidade do ar[span_19](end_span).
--   **[span_20](start_span)Mapa Ambiental Interativo:** Oferece um mapa com camadas de visualização para temperatura, vento e precipitação, permitindo uma análise espacial dos riscos[span_20](end_span).
--   **[span_21](start_span)Alertas Automatizados:** O sistema de alertas notifica os usuários sobre riscos climáticos iminentes, com base em fontes oficiais[span_21](end_span).
--   **[span_22](start_span)Assistente de IA:** Utiliza a API do ChatGPT para fornecer orientações personalizadas e confiáveis aos usuários, baseando-se no conteúdo da plataforma, como guias de ação e protocolos de segurança[span_22](end_span).
--   **[span_23](start_span)Informações Essenciais:** Centraliza o acesso a contatos de emergência (como Defesa Civil, SAMU e Bombeiros) e guias práticos sobre como agir antes, durante e após uma enchente[span_23](end_span).
--   **[span_24](start_span)Educação Contínua:** Promove a educação ambiental com dicas de sustentabilidade, notícias e indicadores ambientais[span_24](end_span).
-
----
-
-## 🛠️ Tecnologias Utilizadas
-
-[span_25](start_span)Este projeto foi construído utilizando um ecossistema de tecnologias modernas, focadas em performance e experiência de usuário[span_25](end_span).
-
--   **[span_26](start_span)Fontes de Dados:** O sistema foi construído a partir da integração de dados de fontes oficiais, como o Instituto Nacional de Meteorologia (INMET) e a Defesa Civil[span_26](end_span).
--   **[span_27](start_span)Frontend:** A plataforma web foi desenvolvida com tecnologias de frontend para criar uma interface de usuário intuitiva[span_27](end_span).
--   **[span_28](start_span)Backend:** Utiliza tecnologias de backend para processamento e centralização dos dados[span_28](end_span).
--   **[span_29](start_span)Georreferenciamento:** A ferramenta de mapa ambiental interativo foi implementada com tecnologias de georreferenciamento para a visualização espacial dos riscos[span_29](end_span).
--   **[span_30](start_span)Inteligência Artificial:** O assistente de IA foi implementado usando a API do ChatGPT[span_30](end_span).
--   **Hospedagem:** Netlify
-
----
-
-## 👨‍💻 A Equipe
-
-[span_31](start_span)Este projeto é o resultado da colaboração entre estudantes e professores da Escola Estadual de Ensino Médio Dr. Aldo Conte[span_31](end_span).
-
-### Alunos Desenvolvedores & Pesquisadores
--   [span_32](start_span)Elias Juriatti Rodrigues Nunes[span_32](end_span)
--   [span_33](start_span)Guilherme Zatti[span_33](end_span)
--   [span_34](start_span)Richard Albuquerque Couto[span_34](end_span)
--   [span_35](start_span)Laísa Linke da Silva[span_35](end_span)
--   [span_36](start_span)Fernanda Damasceno Maragno[span_36](end_span)
-
-### Professores Orientadores
--   [span_37](start_span)Prof. Franciele Pedrolo[span_37](end_span)
--   [span_38](start_span)Prof. Fabiana Oliveira[span_38](end_span)
-
----
-
-## 🎓 Contexto Acadêmico
-
-[span_39](start_span)Este projeto foi desenvolvido para a **Mostra Científica: Criando Caminhos para a Sustentabilidade – Rumo a COP 30**[span_39](end_span).
-
-<p>
-  <strong>ESCOLA ESTADUAL DE ENSINO MÉDIO DR. ALDO CONTE</strong><br>
-  [span_40](start_span)Sarandi/RS, 2025[span_40](end_span)
-</p>
+*Desenvolvido com 💚 para proteger o Rio Grande do Sul dos eventos climáticos extremos.*
