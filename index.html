@@ -503,7 +503,7 @@
             font-size: 0.9rem;
         }
 
-        /* Botão de IA moderno */
+        /* Botão de IA moderno com busca web */
         .ai-chat-btn {
             display: flex;
             align-items: center;
@@ -1198,6 +1198,7 @@
         .chat-input-container {
             display: flex;
             gap: 12px;
+            align-items: center;
         }
 
         .chat-input {
@@ -1215,6 +1216,45 @@
 
         .chat-input:focus {
             border-color: var(--secondary-color);
+        }
+
+        /* Botão de busca web */
+        .web-search-toggle {
+            background: var(--container-border);
+            color: var(--text-color);
+            border: none;
+            border-radius: 12px;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .web-search-toggle.active {
+            background: var(--secondary-color);
+            color: white;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+        }
+
+        .web-search-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        .web-search-status {
+            font-size: 11px;
+            color: var(--secondary-color);
+            margin-bottom: 8px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .web-search-status.active {
+            opacity: 1;
         }
 
         .chat-send-btn {
@@ -1436,7 +1476,18 @@
             opacity: 0.8;
         }
 
-        /* Responsive adjustments */
+        .dev-version-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .dev-version-link:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive adjustments - MELHORADO PARA MOBILE */
         @media (max-width: 1200px) {
             .grid {
                 grid-template-columns: repeat(6, 1fr);
@@ -1445,23 +1496,24 @@
 
         @media (max-width: 768px) {
             .grid {
-                grid-template-columns: repeat(1, 1fr);
+                grid-template-columns: 1fr;
                 gap: 16px;
             }
 
             main {
-                padding: 0 16px;
+                padding: 0 12px; /* Reduzido de 16px para 12px */
                 margin: 20px auto;
             }
 
             .container {
-                padding: 20px;
+                padding: 18px; /* Reduzido de 20px para 18px */
+                margin: 0 4px; /* Adicionado margem lateral mínima */
             }
 
             header {
                 flex-direction: column;
                 align-items: flex-start;
-                padding: 16px;
+                padding: 14px; /* Reduzido de 16px para 14px */
             }
 
             nav {
@@ -1494,8 +1546,8 @@
             .mobile-menu-btn {
                 display: block;
                 position: absolute;
-                top: 16px;
-                right: 16px;
+                top: 14px; /* Ajustado para corresponder ao padding do header */
+                right: 14px; /* Ajustado para corresponder ao padding do header */
             }
 
             .theme-toggle {
@@ -1516,7 +1568,50 @@
 
             .modal {
                 padding: 20px;
-                margin: 12px;
+                margin: 8px; /* Reduzido de 12px para 8px */
+                max-width: calc(100vw - 16px); /* Garante que não ultrapasse a tela */
+            }
+
+            /* Melhorias específicas para containers em mobile */
+            .weather-details {
+                grid-template-columns: 1fr; /* Uma coluna em mobile */
+                gap: 8px;
+            }
+
+            .emergency-contacts {
+                grid-template-columns: repeat(2, 1fr); /* Duas colunas em mobile */
+                gap: 12px;
+            }
+
+            .tips-list {
+                grid-template-columns: 1fr; /* Uma coluna em mobile */
+                gap: 12px;
+            }
+
+            .indicators-grid {
+                grid-template-columns: 1fr; /* Uma coluna em mobile */
+                gap: 12px;
+            }
+
+            .news-sources {
+                grid-template-columns: repeat(2, 1fr); /* Duas colunas em mobile */
+                gap: 12px;
+            }
+
+            /* Ajustes para forecast cards em mobile */
+            .forecast-card {
+                min-width: 120px; /* Reduzido de 140px para 120px */
+                padding: 16px; /* Reduzido de 20px para 16px */
+            }
+
+            /* Ajustes para o mapa em mobile */
+            #map {
+                height: 300px; /* Reduzido de 400px para 300px */
+            }
+
+            /* Ajustes para chat em mobile */
+            .chat-interface {
+                height: 320px; /* Reduzido de 380px para 320px */
             }
         }
 
@@ -1872,42 +1967,32 @@
                 <div class="tip-card">
                     <i class="fas fa-solar-panel"></i>
                     <div class="tip-title">Energia Solar</div>
-                    <p>Considere instalar painéis solares em sua casa para gerar energia limpa e renovável.</p>
+                    <p>Considere instalar painéis solares para reduzir o consumo de energia elétrica.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-car-alt"></i>
+                    <div class="tip-title">Carona Solidária</div>
+                    <p>Compartilhe caronas com colegas para reduzir o número de veículos nas ruas.</p>
                 </div>
                 <div class="tip-card">
                     <i class="fas fa-shopping-bag"></i>
                     <div class="tip-title">Sacolas Reutilizáveis</div>
-                    <p>Use sacolas de pano ou reutilizáveis ao fazer compras, evitando o uso de sacolas plásticas.</p>
-                </div>
-                <div class="tip-card">
-                    <i class="fas fa-water"></i>
-                    <div class="tip-title">Captação de Água da Chuva</div>
-                    <p>Instale sistemas de captação de água da chuva para regar plantas e lavar áreas externas.</p>
+                    <p>Use sacolas de pano ou reutilizáveis ao fazer compras, evitando plástico descartável.</p>
                 </div>
                 <div class="tip-card">
                     <i class="fas fa-utensils"></i>
                     <div class="tip-title">Compostagem</div>
-                    <p>Transforme restos de comida em adubo orgânico através da compostagem doméstica.</p>
+                    <p>Transforme restos orgânicos em adubo natural para plantas e jardins.</p>
                 </div>
                 <div class="tip-card">
                     <i class="fas fa-thermometer-half"></i>
                     <div class="tip-title">Isolamento Térmico</div>
-                    <p>Melhore o isolamento térmico de sua casa para reduzir o consumo de energia com aquecimento e refrigeração.</p>
+                    <p>Melhore o isolamento da sua casa para reduzir o uso de ar condicionado e aquecimento.</p>
                 </div>
                 <div class="tip-card">
-                    <i class="fas fa-tree"></i>
-                    <div class="tip-title">Jardim Vertical</div>
-                    <p>Crie jardins verticais em casa para melhorar a qualidade do ar e reduzir a temperatura ambiente.</p>
-                </div>
-                <div class="tip-card">
-                    <i class="fas fa-mobile-alt"></i>
-                    <div class="tip-title">Tecnologia Sustentável</div>
-                    <p>Mantenha seus dispositivos eletrônicos por mais tempo e recicle adequadamente quando necessário.</p>
-                </div>
-                <div class="tip-card">
-                    <i class="fas fa-carrot"></i>
-                    <div class="tip-title">Horta Caseira</div>
-                    <p>Cultive seus próprios alimentos em casa, reduzindo o impacto do transporte e embalagens.</p>
+                    <i class="fas fa-book"></i>
+                    <div class="tip-title">Livros Digitais</div>
+                    <p>Prefira livros digitais e documentos eletrônicos para economizar papel.</p>
                 </div>
             </div>
         </div>
@@ -1919,15 +2004,19 @@
             <button class="modal-close" id="close-ai-modal">
                 <i class="fas fa-times"></i>
             </button>
-            <h2>Conversar com a IA</h2>
+            <h2><i class="fas fa-robot"></i> Assistente Climático</h2>
             <div class="chat-interface">
                 <div class="chat-messages" id="chat-messages">
                     <div class="message ai">
-                        Olá! Sou o assistente climático do RSAlerta. Como posso ajudar você hoje com informações sobre clima, prevenção de enchentes ou sustentabilidade?
+                        Olá! Sou o assistente climático do RS Alerta. Posso ajudar você com informações sobre o clima, previsões e dicas de sustentabilidade. Como posso ajudar?
                     </div>
                 </div>
+                <div class="web-search-status" id="web-search-status">A busca na web está ativa</div>
                 <div class="chat-input-container">
                     <input type="text" class="chat-input" id="chat-input" placeholder="Digite sua mensagem...">
+                    <button class="web-search-toggle" id="web-search-toggle" title="Ativar/Desativar busca na web">
+                        <i class="fas fa-search"></i>
+                    </button>
                     <button class="chat-send-btn" id="chat-send-btn">
                         <i class="fas fa-paper-plane"></i>
                     </button>
@@ -1935,68 +2024,111 @@
             </div>
         </div>
     </div>
-    
+
+    <!-- Modal da versão dev -->
+    <div class="modal-overlay" id="dev-version-modal">
+        <div class="modal">
+            <button class="modal-close" id="close-dev-modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2><i class="fas fa-code-branch"></i> Versão Dev do RSAlerta</h2>
+            <div style="margin-bottom: 24px;">
+                <p style="margin-bottom: 16px;">Você está usando a versão de desenvolvimento do RSAlerta. Esta versão inclui recursos experimentais e melhorias que estão sendo testadas antes de serem lançadas na versão estável.</p>
+                
+                <h3 style="color: var(--primary-color); margin: 20px 0 12px 0;">Novidades da Versão Dev:</h3>
+                <ul style="padding-left: 20px; margin-bottom: 20px;">
+                    <li>IA atualizada com modelo GPT-5 Nano</li>
+                    <li>Função de busca na web integrada à IA</li>
+                    <li>Interface otimizada para dispositivos móveis</li>
+                    <li>Melhorias na centralização de elementos</li>
+                </ul>
+
+                <h3 style="color: var(--primary-color); margin: 20px 0 12px 0;">Histórico de Versões Estáveis:</h3>
+                <ul style="padding-left: 20px; margin-bottom: 20px; font-size: 0.9rem;">
+                    <li><strong>v6 (19 de Agosto, 2025):</strong> Adição do favicon</li>
+                    <li><strong>v5 (16 de Maio, 2025):</strong> Design modificado para condizer as cores do RS e ficar mais moderno, além adição de novos links, notícias, informações climáticas, tema translúcido e IA melhorada com acesso a informações do site e modal próprio para a mesma, além da adição de novas dicas de sustentabilidade, animações e efeitos visuais</li>
+                    <li><strong>v4:</strong> Redesign para ficar mais moderno</li>
+                    <li><strong>v3:</strong> Mapa climático funcional implementado</li>
+                    <li><strong>v2:</strong> Funcionalidade de IA implementada</li>
+                </ul>
+
+                <div style="text-align: center; margin: 24px 0;">
+                    <p style="margin-bottom: 12px;">Desenvolvido por:</p>
+                    <a href="https://www.instagram.com/elias_jrnunes/" target="_blank" style="color: var(--secondary-color); text-decoration: none; font-weight: 600;">
+                        <i class="fab fa-instagram"></i> @elias_jrnunes
+                    </a>
+                </div>
+
+                <div style="text-align: center;">
+                    <a href="https://rsalerta.netlify.app" target="_blank" style="display: inline-block; background: var(--secondary-color); color: white; padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
+                        <i class="fas fa-external-link-alt"></i> Acessar Versão Estável
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Sobre o RSAlerta</h3>
-                <p>O RSAlerta é um projeto desenvolvido para a feira de ciências de 2025, com o objetivo de fornecer informações climáticas e ambientais para o Rio Grande do Sul, promovendo a sustentabilidade e a prevenção de desastres.</p>
+                <p>Sistema de monitoramento ambiental e climático para o Rio Grande do Sul, fornecendo informações em tempo real sobre condições meteorológicas, qualidade do ar e alertas de emergência.</p>
             </div>
             <div class="footer-section">
-                <h3>Desenvolvedores</h3>
+                <h3>Recursos</h3>
                 <ul>
-                    <li>Elias J. R. Nunes - Dev</li>
-                    <li>Laísa Linke - Colaboradora</li>
-                    <li>Richard A. - Colaborador</li>
-                    <li>Guilherme Zatti - Colaborador</li>
+                    <li>Previsão do tempo em tempo real</li>
+                    <li>Mapa interativo com camadas climáticas</li>
+                    <li>Alertas de emergência</li>
+                    <li>Assistente de IA especializado</li>
+                    <li>Dicas de sustentabilidade</li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>Fontes</h3>
-                <ul>
-                    <li>OpenWeatherMap API</li>
-                    <li>OpenAI API (via Netlify Function)</li>
-                    <li>INMET - Instituto Nacional de Meteorologia</li>
-                    <li>Defesa Civil do Rio Grande do Sul</li>
-                    <li>Secretaria do Meio Ambiente do RS</li>
-                </ul>
+                <h3>Contato</h3>
+                <p>Para emergências, utilize os números disponíveis na seção de contatos de emergência.</p>
+                <p>Para sugestões e melhorias, entre em contato através das redes sociais.</p>
             </div>
         </div>
         <div class="footer-bottom">
-            © 2025 RSAlerta - Todos os direitos reservados
+            <p>&copy; 2025 RSAlerta. Todos os direitos reservados.</p>
+            <p>
+                <a href="#" class="dev-version-link" onclick="openDevModal()">
+                    Você está usando a versão dev do RSAlerta, saiba o que muda
+                </a>
+            </p>
         </div>
     </footer>
-    
+
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <!-- Main JavaScript -->
     <script>
         // Global variables
-        let weatherApiKey = null; // Irá guardar a chave da API para a camada do mapa
-        let currentCity = 'Porto Alegre, RS, Brasil';
-        let currentCoords = { lat: -30.0346, lng: -51.2177 }; // Porto Alegre default
         let map;
         let weatherLayer;
+        let weatherApiKey;
+        let currentCity = 'Porto Alegre, RS, Brasil';
+        let currentCoords = { lat: -30.0346, lng: -51.2177 };
         let currentWeatherData = null;
         let forecastData = null;
         let airQualityData = null;
         let chatHistory = [];
+        let webSearchEnabled = false;
         
-        // DOM Elements
+        // DOM elements
         const citySearchInput = document.getElementById('city-search');
         const citySuggestions = document.getElementById('city-suggestions');
         const searchBtn = document.getElementById('search-btn');
         const currentWeatherContainer = document.getElementById('current-weather-container');
         const dailyForecastContainer = document.getElementById('daily-forecast-container');
-        const weatherAlertsContainer = document.getElementById('weather-alerts');
+        const hourlyForecastContainer = document.getElementById('hourly-forecast');
         const chatMessages = document.getElementById('chat-messages');
         const chatInput = document.getElementById('chat-input');
         const chatSendBtn = document.getElementById('chat-send-btn');
+        const webSearchToggle = document.getElementById('web-search-toggle');
+        const webSearchStatus = document.getElementById('web-search-status');
         const currentTimeEl = document.getElementById('current-time');
         const currentDateEl = document.getElementById('current-date');
         const mapControlBtns = document.querySelectorAll('.map-control-btn');
@@ -2007,9 +2139,11 @@
         // Modal elements
         const sustainabilityModal = document.getElementById('sustainability-modal');
         const aiModal = document.getElementById('ai-modal');
+        const devVersionModal = document.getElementById('dev-version-modal');
         const moreTipsBtn = document.getElementById('more-tips-btn');
         const closeSustainabilityModal = document.getElementById('close-sustainability-modal');
         const closeAiModal = document.getElementById('close-ai-modal');
+        const closeDevModal = document.getElementById('close-dev-modal');
         
         // Theme toggle buttons
         const darkThemeBtn = document.getElementById('dark-theme-btn');
@@ -2211,11 +2345,6 @@
             }
         }
         
-        // O restante do seu código JavaScript permanece o mesmo...
-        // (renderCitySuggestions, updateCurrentWeather, getAirQualityText, etc.)
-        // Cole o restante do seu script original a partir da função renderCitySuggestions aqui.
-        // Omitido para brevidade, pois não há mais alterações.
-        
         // Render city suggestions
         function renderCitySuggestions(cities) {
             citySuggestions.innerHTML = '';
@@ -2368,14 +2497,16 @@
                 });
                 const mostFrequentDescription = Object.entries(descriptionCounts).sort((a, b) => b[1] - a[1])[0][0];
                 
+                const iconUrl = `https://openweathermap.org/img/wn/${mostFrequentIcon}@2x.png`;
+                
                 forecastHTML += `
                     <div class="forecast-card">
                         <div class="day">${dayName}</div>
-                        <img src="https://openweathermap.org/img/wn/${mostFrequentIcon}@2x.png" alt="${mostFrequentDescription}">
+                        <img src="${iconUrl}" alt="${mostFrequentDescription}">
                         <div class="description">${mostFrequentDescription.charAt(0).toUpperCase() + mostFrequentDescription.slice(1)}</div>
                         <div class="temp-range">
-                            <div class="temp-max">${maxTemp}°</div>
-                            <div class="temp-min">${minTemp}°</div>
+                            <span class="temp-max">${maxTemp}°</span>
+                            <span class="temp-min">${minTemp}°</span>
                         </div>
                     </div>
                 `;
@@ -2385,67 +2516,46 @@
             dailyForecastContainer.innerHTML = forecastHTML;
         }
         
-        // Update hourly forecast with cards
+        // Update hourly forecast display
         function updateHourlyForecast() {
             if (!forecastData || !forecastData.list) return;
             
-            // Get next 24 hours of data (8 points, 3 hours apart)
+            // Take first 8 hours
             const hourlyData = forecastData.list.slice(0, 8);
-            const hourlyForecastContainer = document.getElementById('hourly-forecast');
             
-            // Clear previous content
-            hourlyForecastContainer.innerHTML = '';
+            let forecastHTML = '';
             
-            // Create cards for each hour
             hourlyData.forEach(item => {
                 const date = new Date(item.dt * 1000);
                 const hour = date.getHours() + 'h';
                 const temp = Math.round(item.main.temp);
                 const description = item.weather[0].description;
-                const icon = item.weather[0].icon;
+                const iconUrl = `https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`;
                 
-                const card = document.createElement('div');
-                card.className = 'forecast-card';
-                card.innerHTML = `
-                    <div class="hour">${hour}</div>
-                    <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="${description}">
-                    <div class="temp">${temp}°C</div>
-                    <div class="description">${description.charAt(0).toUpperCase() + description.slice(1)}</div>
+                forecastHTML += `
+                    <div class="forecast-card">
+                        <div class="hour">${hour}</div>
+                        <img src="${iconUrl}" alt="${description}">
+                        <div class="temp">${temp}°C</div>
+                        <div class="description">${description.charAt(0).toUpperCase() + description.slice(1)}</div>
+                    </div>
                 `;
-                
-                hourlyForecastContainer.appendChild(card);
             });
+            
+            hourlyForecastContainer.innerHTML = forecastHTML;
         }
         
-        // Check for weather alerts
+        // Check for weather alerts (placeholder)
         function checkForAlerts() {
-            const alerts = currentWeatherData.alerts || [];
-            
-            if (alerts.length === 0) {
-                weatherAlertsContainer.innerHTML = `
-                    <div class="no-alerts">
-                        <i class="fas fa-check-circle"></i>
-                        <p>Não há alertas ativos no momento.</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            let alertsHTML = '';
-            
-            alerts.forEach(alert => {
-                alertsHTML += `
-                    <div class="alert">
-                        <div class="alert-title">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <span>${alert.event}</span>
-                        </div>
-                        <div class="alert-description">${alert.description}</div>
-                    </div>
-                `;
-            });
-            
-            weatherAlertsContainer.innerHTML = alertsHTML;
+            // This would typically check for severe weather alerts
+            // For now, we'll just show no alerts
+            const alertsContainer = document.getElementById('weather-alerts');
+            alertsContainer.innerHTML = `
+                <div class="no-alerts">
+                    <i class="fas fa-check-circle"></i>
+                    <p>Não há alertas ativos no momento.</p>
+                </div>
+            `;
         }
         
         // Modal functions
@@ -2460,25 +2570,29 @@
         }
         
         function openAiModal() {
-            // Scroll down to avoid map bugs
-            window.scrollTo({
-                top: document.body.scrollHeight * 0.3,
-                behavior: 'smooth'
-            });
-            
-            setTimeout(() => {
-                aiModal.classList.add('active');
-                document.body.classList.add('modal-open');
-            }, 300);
+            aiModal.classList.add('active');
+            document.body.classList.add('modal-open');
         }
         
         function closeAiModalFunc() {
             aiModal.classList.remove('active');
             document.body.classList.remove('modal-open');
         }
+
+        function openDevModal() {
+            devVersionModal.classList.add('active');
+            document.body.classList.add('modal-open');
+        }
         
-        // Send message to AI
+        function closeDevModalFunc() {
+            devVersionModal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+        }
+        
+        // Send message to AI with web search capability
         async function sendMessageToAI(message) {
+            if (!message.trim()) return;
+            
             // Add user message to chat
             addMessageToChat(message, 'user');
             
@@ -2487,13 +2601,8 @@
             
             // Add loading indicator
             const loadingId = 'loading-' + Date.now();
-            chatMessages.innerHTML += `
-                <div class="message ai" id="${loadingId}">
-                    <div class="loading">
-                        <div class="loader"></div>
-                    </div>
-                </div>
-            `;
+            const loadingHTML = `<div class="message ai" id="${loadingId}"><div class="loader"></div></div>`;
+            chatMessages.insertAdjacentHTML('beforeend', loadingHTML);
             chatMessages.scrollTop = chatMessages.scrollHeight;
             
             try {
@@ -2564,10 +2673,16 @@
                     };
                 });
                 
-                // Add system message
+                // Add system message with enhanced instructions
                 conversationHistory.unshift({
                     role: 'system',
-                    content: `Você é o assistente climático do RS Alerta, um serviço de monitoramento ambiental e climático para o Rio Grande do Sul. Responda preferencialmente de forma resumida e em texto corrido. Seja gentil e prestativo. Aqui estão informações atualizadas para melhorar suas respostas: ${contextInfo}`
+                    content: `Você é o assistente climático do RS Alerta, um serviço de monitoramento ambiental e climático para o Rio Grande do Sul. Responda preferencialmente de forma resumida e em texto corrido. Seja gentil e prestativo. 
+
+Para informações climáticas de regiões não selecionadas no site, oriente o usuário a mudar a localização no site ou ativar a busca web para melhor precisão. 
+
+Quando a busca web estiver ativada e você receber resultados duplicados ou irrelevantes, priorize sempre as informações do site que você já possui acesso.
+
+Aqui estão informações atualizadas para melhorar suas respostas: ${contextInfo}`
                 });
                 
                 // Add user message
@@ -2576,16 +2691,17 @@
                     content: message
                 });
                 
-                // Make API call to Netlify function
+                // Make API call to Netlify function with web search option
                 const response = await fetch('/.netlify/functions/fetch-openai', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        model: 'gpt-4.1-nano-2025-04-14',
+                        model: 'gpt-5-nano-2025-08-07',
                         messages: conversationHistory,
-                        temperature: 0.7
+                        temperature: 0.7,
+                        useWebSearch: webSearchEnabled
                     })
                 });
                 
@@ -2665,6 +2781,19 @@
             formattedMessage = formattedMessage.replace(/\*(.*?)\*/g, '<em>$1</em>');
             
             return formattedMessage;
+        }
+        
+        // Toggle web search
+        function toggleWebSearch() {
+            webSearchEnabled = !webSearchEnabled;
+            
+            if (webSearchEnabled) {
+                webSearchToggle.classList.add('active');
+                webSearchStatus.classList.add('active');
+            } else {
+                webSearchToggle.classList.remove('active');
+                webSearchStatus.classList.remove('active');
+            }
         }
         
         // Update date and time
@@ -2773,11 +2902,15 @@
                     sendMessageToAI(chatInput.value.trim());
                 }
             });
+
+            // Web search toggle
+            webSearchToggle.addEventListener('click', toggleWebSearch);
             
             // Modal event listeners
             moreTipsBtn.addEventListener('click', openSustainabilityModal);
             closeSustainabilityModal.addEventListener('click', closeSustainabilityModalFunc);
             closeAiModal.addEventListener('click', closeAiModalFunc);
+            closeDevModal.addEventListener('click', closeDevModalFunc);
             
             // Close modals when clicking overlay
             sustainabilityModal.addEventListener('click', (e) => {
@@ -2791,6 +2924,12 @@
                     closeAiModalFunc();
                 }
             });
+
+            devVersionModal.addEventListener('click', (e) => {
+                if (e.target === devVersionModal) {
+                    closeDevModalFunc();
+                }
+            });
             
             // Close modals with Escape key
             document.addEventListener('keydown', (e) => {
@@ -2800,6 +2939,9 @@
                     }
                     if (aiModal.classList.contains('active')) {
                         closeAiModalFunc();
+                    }
+                    if (devVersionModal.classList.contains('active')) {
+                        closeDevModalFunc();
                     }
                 }
             });
