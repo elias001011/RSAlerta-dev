@@ -72,12 +72,12 @@ exports.handler = async (event) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${openAIKey}` // A chave API é usada aqui, no servidor
+        'Authorization': `Bearer ${openAIKey}` 
       },
       body: JSON.stringify({
-        model: model || 'gpt-5-nano-2025-08-07', // Modelo atualizado
+        model: model || 'gpt-5-nano-2025-08-07', 
         messages: enhancedMessages,
-        temperature: temperature || 0.7 // Use a temperatura passada ou um padrão
+        temperature: temperature || 0.7 
       })
     });
 
@@ -88,7 +88,6 @@ exports.handler = async (event) => {
       console.error('Erro da API OpenAI:', data);
       return {
         statusCode: response.status,
-        // Tente passar a mensagem de erro da OpenAI, se disponível
         body: JSON.stringify({ error: data.error ? data.error.message : 'Falha ao buscar da API OpenAI' })
       };
     }
