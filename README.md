@@ -1,4 +1,4 @@
-# RSAlerta
+# RSAlerta (DEV)
 
 <p align="center">
   <img src="https://github.com/elias001011/RSAlerta/blob/main/screenshot.png" alt="Banner do RS Alerta mostrando tecnologia e dados" width="600"/>
@@ -6,10 +6,11 @@
 
 ## 📋 Sobre o Projeto
 
-O **RSAlerta** é uma plataforma digital interativa desenvolvida para monitoramento climático, emissão de alertas e orientações preventivas contra desastres naturais, com foco específico nas enchentes no Rio Grande do Sul.
+O **RSAlerta** é uma plataforma digital interativa desenvolvida para monitoramento climático, emissão de alertas e orientações preventivas contra desastres naturais, com foco específico nas enchentes no Rio Grande do Sul. A versão dev pode ser instável, pois inclui recursos adicionais em teste antes do lançamento oficial. O desenvolvimento ainda é contínuo. Para melhor suporte acesse o site estável.
 
 <p align="center">
-  <a href="https://rsalerta.netlify.app/"><strong>Acesse o site do projeto »</strong></a>
+  <a href="https://rsalerta.netlify.app/"><strong>Acesse projeto estável »</strong></a>
+  <a href="https://rsalerta-dev.netlify.app/"><strong>Acesse projeto dev »</strong></a>
 </p>
 
 ## 🎯 Objetivo
