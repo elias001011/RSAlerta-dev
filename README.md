@@ -6,7 +6,9 @@
 
 ## 📋 Sobre o Projeto
 
+<p align="center">
 <a href="https://rsalerta.netlify.app/"><strong>Acesse projeto estável »</strong></a>
+</p>
 
 O **RSAlerta** é uma plataforma digital interativa desenvolvida para monitoramento climático, emissão de alertas e orientações preventivas contra desastres naturais, com foco específico nas enchentes no Rio Grande do Sul. A versão dev pode ser instável, pois inclui recursos adicionais em teste antes do lançamento oficial. O desenvolvimento ainda é contínuo. Para melhor suporte acesse o site estável.
 
