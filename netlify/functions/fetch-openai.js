@@ -75,7 +75,7 @@ exports.handler = async (event) => {
         'Authorization': `Bearer ${openAIKey}` 
       },
       body: JSON.stringify({
-        model: model || 'gpt-5-nano-2025-08-07', 
+        model: model || 'gpt-4o-mini-2024-07-18', 
         messages: enhancedMessages,
         temperature: temperature || 0.7 
       })
