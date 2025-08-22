@@ -2037,7 +2037,7 @@
                 
                 <h3 style="color: var(--primary-color); margin: 20px 0 12px 0;">Novidades da Versão Dev:</h3>
                 <ul style="padding-left: 20px; margin-bottom: 20px;">
-                    <li>IA atualizada com modelo GPT-5 Nano</li>
+                    <li>IA atualizada com modelo Gemini 2.5 Flash Lite</li>
                     <li>Função de busca na web integrada à IA</li>
                     <li>Interface otimizada para dispositivos móveis</li>
                     <li>Melhorias na centralização de elementos</li>
@@ -2676,7 +2676,7 @@
                 // Add system message with enhanced instructions
                 conversationHistory.unshift({
                     role: 'system',
-                    content: `Você é o assistente climático do RS Alerta, um serviço de monitoramento ambiental e climático para o Rio Grande do Sul. Responda preferencialmente de forma resumida e em texto corrido. Seja gentil e prestativo. 
+                    content: `Você é o assistente climático do RS Alerta, um serviço de monitoramento ambiental e climático para o Rio Grande do Sul. Responda preferencialmente de forma resumida e em texto corrido. Seja gentil e prestativo.
 
 Para informações climáticas de regiões não selecionadas no site, oriente o usuário a mudar a localização no site ou ativar a busca web para melhor precisão. 
 
@@ -2698,7 +2698,7 @@ Aqui estão informações atualizadas para melhorar suas respostas: ${contextInf
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        model: 'gpt-5-nano-2025-08-07',
+                        model: 'gemini-2.5-flash-lite',
                         messages: conversationHistory,
                         temperature: 0.7,
                         useWebSearch: webSearchEnabled
@@ -2980,4 +2980,3 @@ Aqui estão informações atualizadas para melhorar suas respostas: ${contextInf
     </script>
 </body>
 </html>
-
